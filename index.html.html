@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GENEXXO Vision — Knowledge Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-primary: #0a0a0f;
+    --bg-secondary: #111118;
+    --bg-card: #16161f;
+    --bg-card-hover: #1c1c28;
+    --border: rgba(99, 102, 241, 0.12);
+    --border-hover: rgba(99, 102, 241, 0.3);
+    --text-primary: #e8e8ed;
+    --text-secondary: #9394a5;
+    --text-muted: #5e5f72;
+    --accent: #6366f1;
+    --accent-light: #818cf8;
+    --accent-glow: rgba(99, 102, 241, 0.15);
+    --violet: #a78bfa;
+    --violet-deep: #7c3aed;
+    --indigo-deep: #4338ca;
+    --green-tag: #34d399;
+    --green-tag-bg: rgba(52, 211, 153, 0.1);
+    --green-tag-border: rgba(52, 211, 153, 0.25);
+    --font-body: 'DM Sans', -apple-system, sans-serif;
+    --font-mono: 'Space Mono', monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  #particles {
+    position: fixed; top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 0; pointer-events: none;
+  }
+
+  /* ── Top Bar ── */
+  .topbar {
+    position: fixed; top: 0; left: 0; right: 0;
+    height: 56px;
+    background: rgba(17, 17, 24, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    z-index: 200;
+    display: flex; align-items: center;
+    padding: 0 32px; gap: 16px;
+  }
+
+  .topbar-menu {
+    width: 36px; height: 36px;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    transition: all 0.2s;
+    flex-shrink: 0;
+  }
+
+  .topbar-menu:hover {
+    border-color: var(--border-hover);
+    color: var(--text-primary);
+    background: var(--accent-glow);
+  }
+
+  .topbar-xx { width: 28px; height: 22px; flex-shrink: 0; }
+  .topbar-xx svg { width: 100%; height: 100%; display: block; }
+
+  .topbar-label {
+    font-family: var(--font-mono);
+    font-size: 11px; letter-spacing: 2px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+  }
+
+  .topbar-spacer { flex: 1; }
+
+  .topbar-links { display: flex; gap: 20px; }
+
+  .topbar-links a {
+    color: var(--text-muted); text-decoration: none;
+    font-size: 12px; transition: color 0.2s;
+  }
+
+  .topbar-links a:hover { color: var(--accent-light); }
+
+  /* ── Sidebar Overlay ── */
+  .sidebar-overlay {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 299;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.3s;
+  }
+
+  .sidebar-overlay.open { opacity: 1; pointer-events: all; }
+
+  /* ── Sidebar ── */
+  .sidebar {
+    position: fixed; top: 0; left: 0;
+    width: 300px; height: 100vh;
+    background: var(--bg-secondary);
+    border-right: 1px solid var(--border);
+    z-index: 300;
+    display: flex; flex-direction: column;
+    overflow-y: auto;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+
+  .sidebar.open { transform: translateX(0); }
+
+  .sidebar-header {
+    padding: 24px 24px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+
+  .sidebar-header-left { display: flex; align-items: center; gap: 14px; }
+
+  .sidebar-xx-mark { width: 36px; height: 28px; flex-shrink: 0; }
+  .sidebar-xx-mark svg { width: 100%; height: 100%; display: block; }
+
+  .sidebar-brand { display: flex; flex-direction: column; }
+
+  .sidebar-title {
+    font-family: var(--font-mono);
+    font-size: 13px; letter-spacing: 2.5px;
+    color: var(--accent-light);
+    text-transform: uppercase; font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .sidebar-subtitle {
+    font-size: 10px; color: var(--text-muted);
+    letter-spacing: 1.5px; text-transform: uppercase;
+    margin-top: 2px;
+  }
+
+  .sidebar-close {
+    width: 32px; height: 32px;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text-muted); cursor: pointer;
+    font-size: 16px;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+  }
+
+  .sidebar-close:hover { color: var(--text-primary); border-color: var(--border-hover); }
+
+  .sidebar nav { padding: 16px 0; flex: 1; }
+
+  .nav-item {
+    display: block; padding: 10px 24px;
+    color: var(--text-secondary); text-decoration: none;
+    font-size: 14px; font-weight: 400;
+    transition: all 0.2s;
+    border-left: 2px solid transparent;
+  }
+
+  .nav-item:hover, .nav-item.active {
+    color: var(--text-primary);
+    background: var(--accent-glow);
+    border-left-color: var(--accent);
+  }
+
+  .nav-group-label {
+    padding: 20px 24px 6px;
+    font-size: 10px; letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted); font-weight: 600;
+  }
+
+  .nav-sub { padding-left: 40px; font-size: 13px; }
+
+  .sidebar-footer {
+    padding: 16px 24px;
+    border-top: 1px solid var(--border);
+    display: flex; gap: 16px;
+  }
+
+  .sidebar-footer a {
+    color: var(--text-muted); text-decoration: none;
+    font-size: 12px; transition: color 0.2s;
+  }
+
+  .sidebar-footer a:hover { color: var(--accent-light); }
+
+  /* ── Main ── */
+  .main {
+    position: relative; z-index: 1;
+    min-height: 100vh; padding-top: 56px;
+  }
+
+  /* ── Hero ── */
+  .hero {
+    position: relative;
+    padding: 80px 60px 70px;
+    max-width: 1100px; margin: 0 auto;
+    overflow: hidden;
+  }
+
+  .hero-watermark {
+    position: absolute; top: 50%; right: -20px;
+    transform: translateY(-50%);
+    width: 440px; height: 340px;
+    opacity: 0.03; pointer-events: none;
+  }
+
+  .hero-watermark svg { width: 100%; height: 100%; }
+
+  .hero::before {
+    content: '';
+    position: absolute; top: -200px; right: -100px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 6px 14px;
+    background: var(--accent-glow);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    font-size: 11px; letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent-light); font-weight: 600;
+    margin-bottom: 28px;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .hero-badge::before {
+    content: ''; width: 6px; height: 6px;
+    background: var(--accent); border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+  .hero-wordmark {
+    max-width: 520px; margin-bottom: 8px;
+    animation: fadeUp 0.6s 0.05s ease both;
+  }
+
+  .hero-wordmark svg { width: 100%; height: auto; display: block; }
+
+  .hero-vision-label {
+    font-family: var(--font-mono);
+    font-size: 14px; letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--violet);
+    margin-bottom: 32px;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+
+  .hero h1 {
+    font-size: clamp(30px, 4vw, 44px);
+    font-weight: 300; line-height: 1.2;
+    letter-spacing: -0.3px; max-width: 600px;
+    animation: fadeUp 0.6s 0.15s ease both;
+  }
+
+  .hero h1 strong {
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--accent-light), var(--violet));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-sub {
+    margin-top: 14px; font-size: 16px;
+    color: var(--text-secondary);
+    max-width: 500px; line-height: 1.7;
+    font-style: italic;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+
+  .hero-meta {
+    margin-top: 36px; display: flex; gap: 36px;
+    animation: fadeUp 0.6s 0.3s ease both;
+  }
+
+  .hero-stat { text-align: left; }
+
+  .hero-stat-value {
+    font-family: var(--font-mono);
+    font-size: 24px; font-weight: 700;
+    color: var(--accent-light);
+  }
+
+  .hero-stat-label {
+    font-size: 11px; color: var(--text-muted);
+    text-transform: uppercase; letter-spacing: 1.5px;
+    margin-top: 2px;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .content-wrap { max-width: 1100px; margin: 0 auto; }
+
+  /* ── Intro Section ── */
+  .intro {
+    padding: 0 60px 20px;
+    max-width: 760px;
+  }
+
+  .intro p {
+    font-size: 15.5px;
+    color: var(--text-secondary);
+    line-height: 1.85;
+    margin-bottom: 16px;
+  }
+
+  .intro p strong {
+    color: var(--text-primary);
+    font-weight: 500;
+  }
+
+  .intro .domain-examples {
+    color: var(--accent-light);
+    font-family: var(--font-mono);
+    font-size: 13px;
+    letter-spacing: 0.5px;
+  }
+
+  .intro .gravity-line {
+    font-size: 17px;
+    font-weight: 500;
+    font-style: italic;
+    color: var(--text-primary);
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    background: linear-gradient(135deg, var(--accent-light), var(--violet));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  @media (max-width: 768px) {
+    .intro { padding: 0 24px 20px; }
+  }
+
+  /* ── Section ── */
+  .section { padding: 0 60px 60px; }
+
+  .section-label {
+    font-size: 10px; letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--accent); font-weight: 600;
+    margin-bottom: 12px;
+    font-family: var(--font-mono);
+  }
+
+  .section h2 {
+    font-size: 28px; font-weight: 600;
+    margin-bottom: 12px; letter-spacing: -0.3px;
+  }
+
+  .section-intro {
+    color: var(--text-secondary); font-size: 15px;
+    max-width: 600px; margin-bottom: 32px;
+  }
+
+  /* ── Card Grid ── */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px; padding: 28px;
+    text-decoration: none; color: inherit;
+    transition: all 0.25s ease;
+    position: relative; overflow: hidden;
+  }
+
+  .card::after {
+    content: '';
+    position: absolute; top: 0; left: 0;
+    width: 100%; height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--violet));
+    opacity: 0; transition: opacity 0.25s;
+  }
+
+  .card:hover {
+    background: var(--bg-card-hover);
+    border-color: var(--border-hover);
+    transform: translateY(-2px);
+  }
+
+  .card:hover::after { opacity: 1; }
+
+  .card-icon {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    background: var(--accent-glow);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; margin-bottom: 16px;
+  }
+
+  .card h3 { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+  .card p { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+
+  .card-arrow {
+    position: absolute; top: 28px; right: 28px;
+    color: var(--text-muted); font-size: 14px;
+    transition: all 0.25s;
+  }
+
+  .card:hover .card-arrow {
+    color: var(--accent-light);
+    transform: translateX(3px);
+  }
+
+  /* Live Demo tag */
+  .card-tag {
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 3px 10px;
+    background: var(--green-tag-bg);
+    border: 1px solid var(--green-tag-border);
+    border-radius: 100px;
+    font-size: 10px; letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--green-tag);
+    font-weight: 600;
+    margin-bottom: 14px;
+  }
+
+  .card-tag::before {
+    content: ''; width: 5px; height: 5px;
+    background: var(--green-tag);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  /* ── XX Divider ── */
+  .xx-divider {
+    display: flex; align-items: center; justify-content: center;
+    gap: 20px; padding: 0 60px; margin-bottom: 48px;
+  }
+
+  .xx-divider-line { flex: 1; height: 1px; background: var(--border); }
+
+  .xx-divider-mark { width: 28px; height: 22px; opacity: 0.3; flex-shrink: 0; }
+  .xx-divider-mark svg { width: 100%; height: 100%; display: block; }
+
+  /* ── Acquisition Banner ── */
+  .acq-banner {
+    margin: 0 60px 60px; padding: 44px;
+    background: linear-gradient(135deg, rgba(99,102,241,0.08), rgba(167,139,250,0.06));
+    border: 1px solid var(--border);
+    border-radius: 16px; text-align: center;
+    position: relative; overflow: hidden;
+  }
+
+  .acq-banner::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at center, var(--accent-glow) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .acq-banner h2 { font-size: 22px; font-weight: 600; margin-bottom: 8px; position: relative; }
+
+  .acq-banner p {
+    color: var(--text-secondary); font-size: 14px;
+    position: relative; max-width: 500px;
+    margin: 0 auto 24px;
+  }
+
+  .acq-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 28px;
+    background: var(--accent); color: #fff;
+    text-decoration: none; border-radius: 10px;
+    font-size: 14px; font-weight: 600;
+    position: relative; transition: all 0.2s;
+  }
+
+  .acq-btn:hover { background: var(--indigo-deep); transform: translateY(-1px); }
+
+  /* ── Footer ── */
+  .footer {
+    padding: 28px 60px;
+    border-top: 1px solid var(--border);
+    max-width: 1100px; margin: 0 auto;
+  }
+
+  .footer-top {
+    display: flex; justify-content: space-between;
+    align-items: center; flex-wrap: wrap; gap: 16px;
+  }
+
+  .footer-company { font-size: 12px; color: var(--text-muted); line-height: 1.6; }
+  .footer-company strong { color: var(--text-secondary); font-weight: 500; }
+
+  .footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
+
+  .footer-links a {
+    color: var(--text-muted); text-decoration: none;
+    font-size: 12px; transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--accent-light); }
+
+  .footer-bottom {
+    margin-top: 14px; padding-top: 14px;
+    border-top: 1px solid var(--border);
+    font-size: 11px; color: var(--text-muted);
+    display: flex; justify-content: space-between;
+    flex-wrap: wrap; gap: 8px;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 768px) {
+    .topbar { padding: 0 16px; }
+    .topbar-links { display: none; }
+    .hero { padding: 60px 24px 50px; }
+    .section { padding: 0 24px 48px; }
+    .acq-banner { margin: 0 24px 48px; }
+    .footer { padding: 24px; }
+    .xx-divider { padding: 0 24px; }
+    .hero-meta { flex-wrap: wrap; gap: 24px; }
+    .hero-wordmark { max-width: 340px; }
+    .hero-watermark { width: 280px; height: 220px; right: -40px; }
+    .card-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<canvas id="particles"></canvas>
+
+<!-- ═══════════ TOP BAR ═══════════ -->
+<header class="topbar">
+  <button class="topbar-menu" onclick="toggleSidebar()" aria-label="Menu">☰</button>
+  <div class="topbar-xx">
+    <svg viewBox="484 0 176 138" xmlns="http://www.w3.org/2000/svg">
+      <path fill="#818cf8" fill-rule="evenodd" d="M 616,69.25 L 604.8,85.9 L 583.2,118.7 L 572.3,135.3 L 561.4,118.7 L 539.7,85.9 L 506.9,135.6 L 484.8,135.6 L 526.3,72.7 L 528.6,69.25 L 539.5,52.6 L 561.1,19.8 L 572,3.16 L 583,19.8 L 604.6,52.6 L 637.4,2.9 L 659.5,2.9 L 615.8,69.25 Z M 593.9,69.25 L 572.3,36.45 L 550.7,69.25 L 572.3,102.04 Z"/>
+      <path fill="#818cf8" d="M 610.5,94.6 L 637.6,135.6 L 659.7,135.6 L 621.7,77.9 Z"/>
+      <path fill="#818cf8" d="M 506.9,2.9 L 484.8,2.9 L 522.8,60.3 L 534.3,44.2 Z"/>
+    </svg>
+  </div>
+  <span class="topbar-label">Knowledge Hub</span>
+  <div class="topbar-spacer"></div>
+  <div class="topbar-links">
+    <a href="#">genexxovision.com</a>
+    <a href="#">LinkedIn</a>
+    <a href="#">X / Twitter</a>
+    <a href="#">Contact</a>
+  </div>
+</header>
+
+<!-- ═══════════ SIDEBAR OVERLAY ═══════════ -->
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+<!-- ═══════════ SIDEBAR ═══════════ -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-header-left">
+      <div class="sidebar-xx-mark">
+        <svg viewBox="484 0 176 138" xmlns="http://www.w3.org/2000/svg">
+          <path fill="#818cf8" fill-rule="evenodd" d="M 616,69.25 L 604.8,85.9 L 583.2,118.7 L 572.3,135.3 L 561.4,118.7 L 539.7,85.9 L 506.9,135.6 L 484.8,135.6 L 526.3,72.7 L 528.6,69.25 L 539.5,52.6 L 561.1,19.8 L 572,3.16 L 583,19.8 L 604.6,52.6 L 637.4,2.9 L 659.5,2.9 L 615.8,69.25 Z M 593.9,69.25 L 572.3,36.45 L 550.7,69.25 L 572.3,102.04 Z"/>
+          <path fill="#818cf8" d="M 610.5,94.6 L 637.6,135.6 L 659.7,135.6 L 621.7,77.9 Z"/>
+          <path fill="#818cf8" d="M 506.9,2.9 L 484.8,2.9 L 522.8,60.3 L 534.3,44.2 Z"/>
+        </svg>
+      </div>
+      <div class="sidebar-brand">
+        <div class="sidebar-title">GENEXXO</div>
+        <div class="sidebar-subtitle">Knowledge Hub</div>
+      </div>
+    </div>
+    <button class="sidebar-close" onclick="toggleSidebar()">✕</button>
+  </div>
+  <nav>
+    <a href="#" class="nav-item active">Home</a>
+    <a href="#" class="nav-item">The GENEXXO Vision</a>
+    <a href="#" class="nav-item">The Collection</a>
+    <a href="#" class="nav-item">Domain Gallery</a>
+    <a href="#" class="nav-item">Supernova Application</a>
+
+    <div class="nav-group-label">Acquisition Cases</div>
+    <a href="#" class="nav-item nav-sub">Meta Platforms</a>
+    <a href="#" class="nav-item nav-sub">Microsoft</a>
+    <a href="#" class="nav-item nav-sub">X Corp</a>
+    <a href="#" class="nav-item nav-sub">OpenAI</a>
+    <a href="#" class="nav-item nav-sub">Amazon</a>
+
+    <div class="nav-group-label">Vision Series</div>
+    <a href="#" class="nav-item nav-sub">Series Landing Page</a>
+
+    <div class="nav-group-label">More</div>
+    <a href="#" class="nav-item">The Book</a>
+    <a href="#" class="nav-item">Blog</a>
+    <a href="#" class="nav-item">Press</a>
+    <a href="#" class="nav-item">About</a>
+  </nav>
+  <div class="sidebar-footer">
+    <a href="#">Website</a>
+    <a href="#">LinkedIn</a>
+    <a href="#">X / Twitter</a>
+  </div>
+</aside>
+
+<!-- ═══════════ MAIN ═══════════ -->
+<div class="main">
+
+  <!-- ── Hero ── -->
+  <header class="hero">
+    <!-- XX watermark (hollow) -->
+    <div class="hero-watermark">
+      <svg viewBox="484 0 176 138" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#ffffff" fill-rule="evenodd" d="M 616,69.25 L 604.8,85.9 L 583.2,118.7 L 572.3,135.3 L 561.4,118.7 L 539.7,85.9 L 506.9,135.6 L 484.8,135.6 L 526.3,72.7 L 528.6,69.25 L 539.5,52.6 L 561.1,19.8 L 572,3.16 L 583,19.8 L 604.6,52.6 L 637.4,2.9 L 659.5,2.9 L 615.8,69.25 Z M 593.9,69.25 L 572.3,36.45 L 550.7,69.25 L 572.3,102.04 Z"/>
+        <path fill="#ffffff" d="M 610.5,94.6 L 637.6,135.6 L 659.7,135.6 L 621.7,77.9 Z"/>
+        <path fill="#ffffff" d="M 506.9,2.9 L 484.8,2.9 L 522.8,60.3 L 534.3,44.2 Z"/>
+      </svg>
+    </div>
+
+    <div class="hero-badge">Strategic Corporate Opportunity</div>
+
+    <!-- GENEXXO Wordmark (hollow XX) -->
+    <div class="hero-wordmark">
+      <svg viewBox="0 0 796 138" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="wg" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#818cf8"/>
+            <stop offset="50%" stop-color="#a78bfa"/>
+            <stop offset="100%" stop-color="#818cf8"/>
+          </linearGradient>
+        </defs>
+        <path fill="url(#wg)" d="M 130.5,40.9 C 125.6,28.3 117.6,18.3 106.4,11.4 C 95.5,4.4 82.8,0.9 68.7,0.9 C 54.5,0.9 44.8,3.9 34.4,9.6 C 24,15.3 15.8,23.5 9.8,34 C 3.6,44.2 0.6,55.8 0.6,69 C 0.6,82.2 3.6,93.6 9.8,104 C 15.8,114.5 24,122.4 34.4,128.4 C 44.8,134.1 56.3,137.1 68.7,137.1 C 81.1,137.1 90.8,134.6 100.5,129.4 C 109.9,124.2 117.6,117.2 123.6,108.5 C 129.6,99.8 133.3,90.4 134.5,79.9 L 134.5,62.8 L 61.2,62.8 L 61.2,80.2 L 111.2,80.2 C 109.4,91.6 105,100.6 97.5,107.3 C 90,114 80.4,117.2 68.7,117.2 C 57,117.2 52,115.2 45.1,111.2 C 38.1,107.3 32.9,101.5 28.9,94.3 C 25,86.9 23,78.4 23,69 C 23,59.6 25,51.1 28.9,43.7 C 32.9,36.5 38.1,30.7 45.1,26.8 C 52,22.8 59.7,20.8 68.7,20.8 C 77.6,20.8 83.8,22.5 90,25.8 C 96.3,29.3 101,34.2 104.5,40.9 Z"/>
+        <path fill="url(#wg)" d="M 229.4,20.3 L 229.4,2.4 L 155.9,2.4 L 155.9,135.8 L 229.4,135.8 L 229.4,117.9 L 177.8,117.9 L 177.8,77.2 L 223.7,77.2 L 223.7,59.3 L 177.8,59.3 L 177.8,20.3 Z"/>
+        <path fill="url(#wg)" d="M 365.6,2.4 L 343.7,2.4 L 343.7,101.5 L 278.1,2.4 L 256.3,2.4 L 256.3,135.8 L 278.1,135.8 L 278.1,36.5 L 343.7,135.8 L 365.6,135.8 Z"/>
+        <path fill="url(#wg)" d="M 467.9,20.3 L 467.9,2.4 L 394.4,2.4 L 394.4,135.8 L 467.9,135.8 L 467.9,117.9 L 416.3,117.9 L 416.3,77.2 L 462.2,77.2 L 462.2,59.3 L 416.3,59.3 L 416.3,20.3 Z"/>
+        <!-- XX mark (hollow - no centre diamond) -->
+        <path fill="url(#wg)" fill-rule="evenodd" d="M 616,69.25 L 604.8,85.9 L 583.2,118.7 L 572.3,135.3 L 561.4,118.7 L 539.7,85.9 L 506.9,135.6 L 484.8,135.6 L 526.3,72.7 L 528.6,69.25 L 539.5,52.6 L 561.1,19.8 L 572,3.16 L 583,19.8 L 604.6,52.6 L 637.4,2.9 L 659.5,2.9 L 615.8,69.25 Z M 593.9,69.25 L 572.3,36.45 L 550.7,69.25 L 572.3,102.04 Z"/>
+        <path fill="url(#wg)" d="M 610.5,94.6 L 637.6,135.6 L 659.7,135.6 L 621.7,77.9 Z"/>
+        <path fill="url(#wg)" d="M 506.9,2.9 L 484.8,2.9 L 522.8,60.3 L 534.3,44.2 Z"/>
+        <!-- O -->
+        <path fill="url(#wg)" d="M 727.6,118.2 C 718.9,118.2 710.9,116.2 704,112.2 C 697,108.3 691.8,102.5 687.8,95.1 C 683.8,87.6 681.9,78.9 681.9,69.3 C 681.9,59.6 683.8,50.9 687.8,43.4 C 691.8,36 697,30.2 704,26.3 C 710.9,22.3 718.6,20.3 727.6,20.3 C 736.5,20.3 744.2,22.3 751.2,26.3 C 758.1,30.2 763.3,36 767.3,43.4 C 771.3,50.9 773.3,59.3 773.3,69.3 C 773.3,79.2 771.3,87.6 767.3,95.1 C 763.3,102.5 758.1,108.3 751.2,112.2 C 744.2,116.2 736.5,118.2 727.6,118.2 M 727.6,137.1 C 740,137.1 751.4,134.1 761.9,128.4 C 772.3,122.7 780.5,114.5 786.4,104 C 792.4,93.6 795.4,81.9 795.4,69 C 795.4,56.1 792.4,44.4 786.4,34 C 780.5,23.5 772.3,15.6 761.9,9.6 C 751.4,3.9 740,0.9 727.6,0.9 C 715.1,0.9 703.7,3.9 693.3,9.6 C 682.8,15.3 674.6,23.5 668.7,34 C 662.7,44.4 659.5,56.1 659.5,69 C 659.5,81.9 662.5,93.8 668.7,104 C 674.6,114.5 683.1,122.7 693.3,128.4 C 703.7,134.1 715.1,137.1 727.6,137.1 Z"/>
+      </svg>
+    </div>
+
+    <div class="hero-vision-label">Vision</div>
+    <h1>The <strong>Organizing Layer</strong> for the Internet</h1>
+    <p class="hero-sub">Where everything finds its natural home.</p>
+
+    <div class="hero-meta">
+      <div class="hero-stat">
+        <div class="hero-stat-value">10,000+</div>
+        <div class="hero-stat-label">Premium Domains</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-value">45</div>
+        <div class="hero-stat-label">Categories</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-value">14 yrs</div>
+        <div class="hero-stat-label">In Assembly</div>
+      </div>
+    </div>
+  </header>
+
+  <div class="content-wrap">
+
+    <!-- XX Divider -->
+    <div class="xx-divider">
+      <div class="xx-divider-line"></div>
+      <div class="xx-divider-mark">
+        <svg viewBox="484 0 176 138" xmlns="http://www.w3.org/2000/svg">
+          <path fill="#818cf8" fill-rule="evenodd" d="M 616,69.25 L 604.8,85.9 L 583.2,118.7 L 572.3,135.3 L 561.4,118.7 L 539.7,85.9 L 506.9,135.6 L 484.8,135.6 L 526.3,72.7 L 528.6,69.25 L 539.5,52.6 L 561.1,19.8 L 572,3.16 L 583,19.8 L 604.6,52.6 L 637.4,2.9 L 659.5,2.9 L 615.8,69.25 Z M 593.9,69.25 L 572.3,36.45 L 550.7,69.25 L 572.3,102.04 Z"/>
+          <path fill="#818cf8" d="M 610.5,94.6 L 637.6,135.6 L 659.7,135.6 L 621.7,77.9 Z"/>
+          <path fill="#818cf8" d="M 506.9,2.9 L 484.8,2.9 L 522.8,60.3 L 534.3,44.2 Z"/>
+        </svg>
+      </div>
+      <div class="xx-divider-line"></div>
+    </div>
+
+    <!-- ── Intro ── -->
+    <div class="intro">
+      <p>The GENEXXO Vision is a <strong>Supernova Application</strong> — a multi-dimensional network of over 10,000 XX-branded single-word .com domains spanning every significant commercial category. <span class="domain-examples">TechXX.com · BeautyXX.com · DroneXX.com · FinanceXX.com</span>. Each one a gateway between the physical and digital worlds — an invincible brand asset that cannot be replicated at any price.</p>
+      <p>Together they form the ultimate foundation — an ecosystem built on specialised content, communities, and commerce. A place where AI will thrive. Where innovation will flourish.</p>
+      <p class="gravity-line">Where all gateways lead to GENEXXO.</p>
+    </div>
+
+    <!-- ── Explore the Vision — 4 cards ── -->
+    <section class="section">
+      <div class="section-label">Documentation</div>
+      <h2>Explore the Vision</h2>
+      <p class="section-intro">Strategic framework, portfolio architecture, interactive prototype, and the full domain collection.</p>
+      <div class="card-grid">
+        <a href="#" class="card">
+          <div class="card-icon">📐</div>
+          <span class="card-arrow">→</span>
+          <h3>The GENEXXO Vision</h3>
+          <p>Full strategic framework and conceptual foundation for the organizing layer.</p>
+        </a>
+        <a href="#" class="card">
+          <div class="card-icon">🌐</div>
+          <span class="card-arrow">→</span>
+          <h3>The Collection</h3>
+          <p>Domain infrastructure, portfolio architecture, and the XX naming convention.</p>
+        </a>
+        <a href="#" class="card">
+          <div class="card-icon">🗂</div>
+          <span class="card-arrow">→</span>
+          <h3>Domain Gallery</h3>
+          <p>Browse the full GENEXXO collection across all 45 commercial categories.</p>
+        </a>
+        <a href="#" class="card">
+          <div class="card-tag">Live Demo</div>
+          <span class="card-arrow">→</span>
+          <h3>The Supernova Application</h3>
+          <p>Interactive demo — explore the hub-and-gateway ecosystem architecture in action.</p>
+        </a>
+      </div>
+    </section>
+
+    <!-- XX Divider -->
+    <div class="xx-divider">
+      <div class="xx-divider-line"></div>
+      <div class="xx-divider-mark">
+        <svg viewBox="484 0 176 138" xmlns="http://www.w3.org/2000/svg">
+          <path fill="#818cf8" fill-rule="evenodd" d="M 616,69.25 L 604.8,85.9 L 583.2,118.7 L 572.3,135.3 L 561.4,118.7 L 539.7,85.9 L 506.9,135.6 L 484.8,135.6 L 526.3,72.7 L 528.6,69.25 L 539.5,52.6 L 561.1,19.8 L 572,3.16 L 583,19.8 L 604.6,52.6 L 637.4,2.9 L 659.5,2.9 L 615.8,69.25 Z M 593.9,69.25 L 572.3,36.45 L 550.7,69.25 L 572.3,102.04 Z"/>
+          <path fill="#818cf8" d="M 610.5,94.6 L 637.6,135.6 L 659.7,135.6 L 621.7,77.9 Z"/>
+          <path fill="#818cf8" d="M 506.9,2.9 L 484.8,2.9 L 522.8,60.3 L 534.3,44.2 Z"/>
+        </svg>
+      </div>
+      <div class="xx-divider-line"></div>
+    </div>
+
+    <!-- ── CTA ── -->
+    <div class="acq-banner">
+      <h2>A Strategic Corporate Opportunity</h2>
+      <p>GENEXXO Vision was built for one purpose: to deliver the organizing layer to a major technology corporation with the scale to deploy it.</p>
+      <a href="#" class="acq-btn">Read the Full Vision →</a>
+    </div>
+
+    <!-- ── Footer ── -->
+    <footer class="footer">
+      <div class="footer-top">
+        <div class="footer-company">
+          <strong>GENEXXO Vision Limited</strong> · Company No. 022622V · Isle of Man
+        </div>
+        <div class="footer-links">
+          <a href="#">genexxovision.com</a>
+          <a href="#">LinkedIn</a>
+          <a href="#">@GENEXXOvision</a>
+          <a href="#">@GENEXXOfounder</a>
+          <a href="#">info@genexxo.com</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2024 GENEXXO Vision Limited. All rights reserved.</span>
+        <span>📖 <a href="#" style="color:var(--text-muted);text-decoration:none;">Read the Book on Amazon</a></span>
+      </div>
+    </footer>
+
+  </div>
+</div>
+
+<script>
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('sidebarOverlay').classList.toggle('open');
+}
+
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+let particles = [];
+const PARTICLE_COUNT = 60;
+
+function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+resize();
+window.addEventListener('resize', resize);
+
+class Particle {
+  constructor() {
+    this.x = Math.random() * canvas.width;
+    this.y = Math.random() * canvas.height;
+    this.vx = (Math.random() - 0.5) * 0.3;
+    this.vy = (Math.random() - 0.5) * 0.3;
+    this.r = Math.random() * 1.5 + 0.5;
+  }
+  update() {
+    this.x += this.vx; this.y += this.vy;
+    if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+    if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+  }
+  draw() {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(99,102,241,0.35)';
+    ctx.fill();
+  }
+}
+
+for (let i = 0; i < PARTICLE_COUNT; i++) particles.push(new Particle());
+
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  particles.forEach(p => { p.update(); p.draw(); });
+  for (let i = 0; i < particles.length; i++) {
+    for (let j = i + 1; j < particles.length; j++) {
+      const dx = particles[i].x - particles[j].x;
+      const dy = particles[i].y - particles[j].y;
+      const d = Math.sqrt(dx * dx + dy * dy);
+      if (d < 140) {
+        ctx.beginPath();
+        ctx.moveTo(particles[i].x, particles[i].y);
+        ctx.lineTo(particles[j].x, particles[j].y);
+        ctx.strokeStyle = 'rgba(99,102,241,' + (0.06 * (1 - d / 140)) + ')';
+        ctx.lineWidth = 0.5;
+        ctx.stroke();
+      }
+    }
+  }
+  requestAnimationFrame(animate);
+}
+animate();
+</script>
+</body>
+</html>
