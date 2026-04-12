@@ -146,12 +146,47 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
 .xx-divider-mark { width: 28px; height: 22px; opacity: 0.3; flex-shrink: 0; }
 .xx-divider-mark svg { width: 100%; height: 100%; display: block; }
 
-.acq-banner { margin: 0 60px 60px; padding: 44px; background: linear-gradient(135deg, rgba(59,92,238,0.06), rgba(123,92,214,0.06), rgba(255,62,142,0.03)); border: 1px solid var(--border); border-radius: 16px; text-align: center; position: relative; overflow: hidden; }
-.acq-banner::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at center, var(--purple-glow) 0%, transparent 60%); pointer-events: none; }
-.acq-banner h2 { font-size: 22px; font-weight: 600; margin-bottom: 8px; position: relative; }
-.acq-banner p { color: var(--text-secondary); font-size: 14px; position: relative; max-width: 500px; margin: 0 auto 24px; }
-.acq-btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 28px; background: linear-gradient(135deg, var(--purple), var(--accent)); color: #fff; text-decoration: none; border-radius: 10px; font-size: 14px; font-weight: 600; position: relative; transition: all 0.2s; }
-.acq-btn:hover { transform: translateY(-1px); filter: brightness(1.1); }
+/* ── Opportunity Section ── */
+.opp-header { text-align: center; margin-bottom: 48px; padding-top: 20px; }
+.opp-badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; background: var(--coral-glow); border: 1px solid var(--coral-border); border-radius: 100px; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--coral); font-weight: 600; margin-bottom: 20px; }
+.opp-badge::before { content: ''; width: 6px; height: 6px; background: var(--coral); border-radius: 50%; animation: pulse 2s infinite; }
+.opp-title { font-size: 32px; font-weight: 700; letter-spacing: -0.5px; }
+
+.thesis { max-width: 720px; margin: 0 auto 48px; text-align: center; padding: 0 20px; }
+.thesis p { font-size: 16px; color: var(--text-secondary); line-height: 1.85; margin-bottom: 16px; }
+.thesis p strong { color: var(--text-primary); font-weight: 500; }
+.thesis-gravity { font-size: 17px; font-weight: 500; font-style: italic; margin-top: 24px; background: linear-gradient(135deg, var(--coral), var(--purple), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+.asset-bar { display: flex; gap: 16px; margin: 0 60px 48px; }
+.asset-stat { flex: 1; padding: 24px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; text-align: center; position: relative; overflow: hidden; }
+.asset-stat::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, var(--coral), var(--purple), var(--accent)); opacity: 0.6; }
+.asset-stat-value { font-family: var(--font-mono); font-size: 22px; font-weight: 700; color: var(--accent-light); margin-bottom: 4px; }
+.asset-stat-label { font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+.asset-stat-desc { font-size: 13px; color: var(--text-secondary); margin-top: 8px; line-height: 1.5; }
+
+.acq-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--purple); font-weight: 600; margin-bottom: 16px; text-align: center; }
+.acq-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin: 0 60px 48px; }
+.acq-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 28px; transition: all 0.25s; position: relative; overflow: hidden; }
+.acq-card::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, var(--coral), var(--purple), var(--accent)); opacity: 0; transition: opacity 0.25s; }
+.acq-card:hover { background: var(--bg-card-hover); border-color: var(--border-hover); transform: translateY(-2px); }
+.acq-card:hover::after { opacity: 1; }
+.acq-card-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; margin-bottom: 16px; }
+.acq-card-icon.tech { background: rgba(59, 92, 238, 0.12); }
+.acq-card-icon.retail { background: rgba(52, 211, 153, 0.1); }
+.acq-card-icon.strategic { background: var(--purple-glow); }
+.acq-card-icon.alt { background: var(--coral-glow); }
+.acq-card h3 { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+.acq-card p { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+
+.agentic-note { max-width: 720px; margin: 0 auto 48px; padding: 28px 32px; background: linear-gradient(135deg, rgba(59,92,238,0.06), rgba(123,92,214,0.04), rgba(255,62,142,0.02)); border: 1px solid var(--border); border-radius: 14px; text-align: center; }
+.agentic-note p { font-size: 14px; color: var(--text-secondary); line-height: 1.7; }
+.agentic-note strong { color: var(--text-primary); font-weight: 500; }
+
+.opp-close { text-align: center; max-width: 600px; margin: 0 auto 60px; padding: 32px 0 0; border-top: 1px solid var(--border); }
+.opp-close-line { font-size: 18px; font-weight: 500; line-height: 1.6; background: linear-gradient(135deg, var(--coral), var(--purple), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 12px; }
+.opp-close-sub { font-size: 14px; color: var(--text-muted); font-style: italic; margin-bottom: 24px; }
+.opp-btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 28px; background: linear-gradient(135deg, var(--purple), var(--accent)); color: #fff; text-decoration: none; border-radius: 10px; font-size: 14px; font-weight: 600; transition: all 0.2s; }
+.opp-btn:hover { transform: translateY(-1px); filter: brightness(1.1); }
 
 .footer { padding: 28px 60px; border-top: 1px solid var(--border); max-width: 1100px; margin: 0 auto; }
 .footer-company { font-size: 12px; color: var(--text-muted); text-align: center; }
@@ -163,6 +198,9 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
   .hero { padding: 60px 24px 50px; }
   .section { padding: 0 24px 48px; }
   .acq-banner { margin: 0 24px 48px; }
+  .asset-bar { flex-direction: column; margin: 0 24px 48px; }
+  .acq-grid { grid-template-columns: 1fr; margin: 0 24px 48px; }
+  .thesis { padding: 0; }
   .footer { padding: 24px; }
   .xx-divider { padding: 0 24px; }
   .hero-meta { flex-wrap: wrap; gap: 24px; }
@@ -249,12 +287,43 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
       </div>
     </section>
 
+    <!-- ── Strategic Corporate Opportunity ── -->
     <div class="xx-divider"><div class="xx-divider-line"></div><div class="xx-divider-mark"><svg viewBox="484 0 176 138" xmlns="http://www.w3.org/2000/svg"><path fill="#7b5cd6" fill-rule="evenodd" d="M 616,69.25 L 604.8,85.9 L 583.2,118.7 L 572.3,135.3 L 561.4,118.7 L 539.7,85.9 L 506.9,135.6 L 484.8,135.6 L 526.3,72.7 L 528.6,69.25 L 539.5,52.6 L 561.1,19.8 L 572,3.16 L 583,19.8 L 604.6,52.6 L 637.4,2.9 L 659.5,2.9 L 615.8,69.25 Z M 593.9,69.25 L 572.3,36.45 L 550.7,69.25 L 572.3,102.04 Z"/><path fill="#7b5cd6" d="M 610.5,94.6 L 637.6,135.6 L 659.7,135.6 L 621.7,77.9 Z"/><path fill="#7b5cd6" d="M 506.9,2.9 L 484.8,2.9 L 522.8,60.3 L 534.3,44.2 Z"/></svg></div><div class="xx-divider-line"></div></div>
 
-    <div class="acq-banner">
-      <h2>A Strategic Corporate Opportunity</h2>
-      <p>GENEXXO Vision was built for one purpose: to deliver the organizing layer to a major technology corporation with the scale to deploy it.</p>
-      <a href="vision.html" class="acq-btn">Read the Full Vision &rarr;</a>
+    <div class="opp-header">
+      <div class="opp-badge">Strategic Corporate Opportunity</div>
+      <h2 class="opp-title">The Defining Moment</h2>
+    </div>
+
+    <div class="thesis">
+      <p>The internet is approaching a structural transition. AI agents, autonomous commerce, and an unprecedented volume of content are converging on a digital landscape that was <strong>never designed to organise them</strong>. The platforms that exist today will not absorb what's coming &mdash; they'll overflow into noise, fragmentation, and chaos.</p>
+      <p>What's needed is not another app, not another platform, not another feature. What's needed is a <strong>new organizing layer</strong> &mdash; specialised, interconnected, AI-native, and anchored by infrastructure that reaches into every category of human activity. A foundation for a network where everything finds its natural home.</p>
+      <p>With every month that passes, the agentic infrastructure matures. The deployment path becomes clearer. The opportunity becomes more concrete. <strong>This is not a question of if. It is a question of when &mdash; and who.</strong></p>
+      <p class="thesis-gravity">The corporation that moves first doesn't just enter a market. It becomes the market.</p>
+    </div>
+
+    <div class="asset-bar">
+      <div class="asset-stat"><div class="asset-stat-value">10,000+</div><div class="asset-stat-label">XX Domains</div><div class="asset-stat-desc">Single-word .com domains spanning every significant commercial category</div></div>
+      <div class="asset-stat"><div class="asset-stat-value">14 Years</div><div class="asset-stat-label">In Assembly</div><div class="asset-stat-desc">A window that opened once and has now permanently closed</div></div>
+      <div class="asset-stat"><div class="asset-stat-value">Invincible</div><div class="asset-stat-label">Moat</div><div class="asset-stat-desc">No competing collection of comparable quality can ever be assembled again</div></div>
+    </div>
+
+    <div class="acq-label">Who Acquires The Organizing Layer</div>
+    <div class="acq-grid">
+      <div class="acq-card"><div class="acq-card-icon tech">&#9881;</div><h3>Technology Titans</h3><p>The world's leading technology corporations possess the AI capabilities, cloud infrastructure, and global reach to deploy GENEXXO at scale &mdash; transforming the XX collection into the dominant organizing layer for digital commerce.</p></div>
+      <div class="acq-card"><div class="acq-card-icon retail">&#9733;</div><h3>Retail Powerhouses</h3><p>Global retail and marketplace leaders seeking digital transformation gain the gateway architecture to create authentic category leadership across thousands of specialised destinations.</p></div>
+      <div class="acq-card"><div class="acq-card-icon strategic">&#9670;</div><h3>Strategic Acquirers</h3><p>Major entertainment, financial, and institutional players could acquire GENEXXO and partner with technology leaders for execution &mdash; gaining the organizing framework while leveraging established partnerships.</p></div>
+      <div class="acq-card"><div class="acq-card-icon alt">&#10038;</div><h3>Alternative Pathways</h3><p>Beyond traditional acquisition, GENEXXO offers options and tokenization models that enable a global community to participate directly in the journey toward the Organizing Layer.</p></div>
+    </div>
+
+    <div class="agentic-note">
+      <p>This is not a typical startup seeking venture capital. GENEXXO is <strong>foundational infrastructure</strong> &mdash; 10,000+ anchors for a network that reaches into every category that exists. Interconnected. AI-native. Unreplicable at any price. <strong>The one-of-a-kind asset that will empower an entity to become the facilitator of digital commerce for decades to come.</strong></p>
+    </div>
+
+    <div class="opp-close">
+      <p class="opp-close-line">The corporation that acquires GENEXXO doesn't just buy domains. It becomes the organizing layer for the next era of the internet.</p>
+      <p class="opp-close-sub">Once in a generation. The constellation is assembled. It awaits its commander.</p>
+      <a href="vision.html" class="opp-btn">Read the Full Vision &rarr;</a>
     </div>
 
     <footer class="footer">
