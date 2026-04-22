@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>There Can Only Be One Organizing Layer — GENEXXO</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@300;400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #08080d;
+  --card-1: #0a0b12;  --card-2: #0b0c14;  --card-3: #0c0d15;
+  --card-4: #0d0e16;  --card-5: #0e0f17;  --card-6: #0d0e16;
+  --card-7: #0c0d15;  --card-8: #0b0c14;  --card-9: #0a0b12;
+  --card-10: #08080d;
+  --text: #e4e4ec;
+  --text-dim: #8a8b9e;
+  --text-muted: #55566a;
+  --accent: #5a78f5;
+  --accent-dim: rgba(90,120,245,0.15);
+  --red: #ec1c24;
+  --blue: #1b75bb;
+  --purple: #7b5cd6;
+  --coral: #ff3e8e;
+  --serif: 'Instrument Serif', Georgia, serif;
+  --mono: 'IBM Plex Mono', monospace;
+  --sans: 'DM Sans', sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-snap-type:y mandatory;scroll-behavior:smooth;overflow-x:hidden;}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);}
+
+/* ── SCROLL CONTAINER ── */
+.card{
+  min-height:100dvh;
+  scroll-snap-align:start;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  padding:60px 32px;
+  position:relative;
+  overflow:hidden;
+}
+
+/* ── CARD CONTENT ── */
+.card-inner{
+  max-width:640px;
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  gap:28px;
+}
+.card-num{
+  font-family:var(--mono);
+  font-size:11px;
+  font-weight:300;
+  letter-spacing:4px;
+  color:var(--text-muted);
+  text-transform:uppercase;
+}
+.card-illust{
+  width:100%;
+  max-width:420px;
+  height:auto;
+  aspect-ratio:16/10;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.card-illust svg{width:100%;height:100%;}
+.card h2{
+  font-family:var(--serif);
+  font-size:clamp(28px,5vw,44px);
+  font-weight:400;
+  line-height:1.2;
+  letter-spacing:-0.3px;
+  max-width:560px;
+}
+.card h2 em{
+  font-style:italic;
+  color:var(--accent);
+}
+.card h2 .red{color:var(--red);}
+.card h2 .grad{
+  background:linear-gradient(135deg,var(--red),var(--purple),var(--blue));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.card p{
+  font-size:clamp(15px,2.2vw,17px);
+  line-height:1.8;
+  color:var(--text-dim);
+  max-width:520px;
+  font-weight:300;
+}
+.card p strong{color:var(--text);font-weight:500;}
+
+/* ── SCROLL CUE ── */
+.scroll-cue{
+  position:absolute;
+  bottom:24px;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:6px;
+  opacity:0.3;
+  animation:bob 2.5s ease-in-out infinite;
+}
+.scroll-cue span{
+  font-family:var(--mono);
+  font-size:9px;
+  letter-spacing:3px;
+  color:var(--text-muted);
+  text-transform:uppercase;
+}
+.scroll-cue::after{
+  content:'';
+  width:1px;height:20px;
+  background:linear-gradient(to bottom,var(--text-muted),transparent);
+}
+@keyframes bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
+
+/* ── CARD 5 URL COMPARISON ── */
+.url-compare{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  width:100%;
+  max-width:480px;
+  text-align:left;
+}
+.url-ugly{
+  font-family:var(--mono);
+  font-size:clamp(9px,1.5vw,11px);
+  font-weight:300;
+  color:var(--text-muted);
+  padding:8px 14px;
+  background:rgba(255,255,255,0.02);
+  border:1px solid rgba(255,255,255,0.04);
+  border-radius:6px;
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+  opacity:0.5;
+}
+.url-clean{
+  font-family:var(--mono);
+  font-size:clamp(18px,3vw,26px);
+  font-weight:400;
+  color:var(--text);
+  padding:16px 20px;
+  background:linear-gradient(135deg,rgba(236,28,36,0.06),rgba(27,117,187,0.06));
+  border:1px solid rgba(90,120,245,0.2);
+  border-radius:10px;
+  text-align:center;
+  margin-top:12px;
+  letter-spacing:1px;
+  text-shadow:0 0 30px rgba(90,120,245,0.3);
+}
+
+/* ── CARD 10 CTA ── */
+.cta-btn{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:14px 32px;
+  background:linear-gradient(135deg,var(--purple),var(--accent));
+  color:#fff;text-decoration:none;border-radius:10px;
+  font-size:15px;font-weight:600;
+  transition:all 0.25s;
+  margin-top:8px;
+}
+.cta-btn:hover{transform:translateY(-2px);filter:brightness(1.15);}
+
+/* ── DOT PROGRESS ── */
+.progress{
+  position:fixed;
+  right:16px;
+  top:50%;
+  transform:translateY(-50%);
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  z-index:100;
+}
+.progress-dot{
+  width:6px;height:6px;
+  border-radius:50%;
+  background:var(--text-muted);
+  opacity:0.25;
+  transition:all 0.3s;
+  cursor:pointer;
+  border:none;
+  padding:0;
+}
+.progress-dot.active{
+  opacity:1;
+  background:var(--accent);
+  box-shadow:0 0 8px var(--accent);
+}
+
+/* ── RESPONSIVE ── */
+@media(max-width:480px){
+  .card{padding:48px 20px;}
+  .card-illust{max-width:300px;}
+  .progress{right:8px;gap:8px;}
+  .progress-dot{width:5px;height:5px;}
+}
+</style>
+</head>
+<body>
+
+<!-- ── PROGRESS DOTS ── -->
+<nav class="progress" id="progress"></nav>
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     CARD 1 — TITLE
+     ══════════════════════════════════════════════════════════════════════════ -->
+<section class="card" style="background:var(--card-1)">
+  <div class="card-inner">
+    <div class="card-num">GENEXXO Vision</div>
+    <div class="card-illust">
+      <svg viewBox="0 0 420 260" xmlns="http://www.w3.org/2000/svg">
+        <!-- Diamond/XX constellation mark -->
+        <defs>
+          <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#ec1c24" stop-opacity="0.8"/>
+            <stop offset="50%" stop-color="#7b5cd6" stop-opacity="0.6"/>
+            <stop offset="100%" stop-color="#1b75bb" stop-opacity="0.8"/>
+          </linearGradient>
+        </defs>
+        <line x1="210" y1="40" x2="130" y2="130" stroke="url(#g1)" stroke-width="2.5" opacity="0.7"/>
+        <line x1="210" y1="40" x2="290" y2="130" stroke="url(#g1)" stroke-width="2.5" opacity="0.7"/>
+        <line x1="130" y1="130" x2="210" y2="220" stroke="url(#g1)" stroke-width="2.5" opacity="0.7"/>
+        <line x1="290" y1="130" x2="210" y2="220" stroke="url(#g1)" stroke-width="2.5" opacity="0.7"/>
+        <circle cx="210" cy="40" r="5" fill="#ec1c24" opacity="0.9"/>
+        <circle cx="130" cy="130" r="5" fill="#7b5cd6" opacity="0.9"/>
+        <circle cx="290" cy="130" r="5" fill="#1b75bb" opacity="0.9"/>
+        <circle cx="210" cy="220" r="5" fill="#5a78f5" opacity="0.9"/>
+        <circle cx="210" cy="130" r="28" fill="none" stroke="url(#g1)" stroke-width="1" opacity="0.3"/>
+        <circle cx="210" cy="130" r="55" fill="none" stroke="url(#g1)" stroke-width="0.5" opacity="0.15"/>
+        <circle cx="210" cy="130" r="90" fill="none" stroke="url(#g1)" stroke-width="0.3" opacity="0.08"/>
+        <text x="210" y="137" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="11" fill="#5a78f5" opacity="0.7" letter-spacing="6">XX</text>
+      </svg>
+    </div>
+    <h2>There Can Only Be <em>One</em> Organizing Layer</h2>
+    <p>Why the GENEXXO Collection is the only asset that can deliver it.</p>
+  </div>
+  <div class="scroll-cue"><span>Scroll</span></div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     CARD 2 — PLATFORM IS COMMODITY
+     ══════════════════════════════════════════════════════════════════════════ -->
+<section class="card" style="background:var(--card-2)">
+  <div class="card-inner">
+    <div class="card-num">01 · The Reality</div>
+    <div class="card-illust">
+      <svg viewBox="0 0 420 260" xmlns="http://www.w3.org/2000/svg">
+        <!-- Grid of identical app icons -->
+        <g opacity="0.35">
+          <g id="appicon">
+            <rect width="28" height="28" rx="6" fill="none" stroke="#5e5f72" stroke-width="0.8"/>
+            <rect x="7" y="7" width="14" height="14" rx="2" fill="#5e5f72" opacity="0.3"/>
+          </g>
+        </g>
+        <!-- 8x5 grid of identical icons -->
+        <g opacity="0.3">
+          <!-- Row 1 -->
+          <use href="#appicon" x="56" y="30"/><use href="#appicon" x="96" y="30"/><use href="#appicon" x="136" y="30"/><use href="#appicon" x="176" y="30"/><use href="#appicon" x="216" y="30"/><use href="#appicon" x="256" y="30"/><use href="#appicon" x="296" y="30"/><use href="#appicon" x="336" y="30"/>
+          <!-- Row 2 -->
+          <use href="#appicon" x="56" y="72"/><use href="#appicon" x="96" y="72"/><use href="#appicon" x="136" y="72"/><use href="#appicon" x="176" y="72"/><use href="#appicon" x="216" y="72"/><use href="#appicon" x="256" y="72"/><use href="#appicon" x="296" y="72"/><use href="#appicon" x="336" y="72"/>
+          <!-- Row 3 -->
+          <use href="#appicon" x="56" y="114"/><use href="#appicon" x="96" y="114"/><use href="#appicon" x="136" y="114"/><use href="#appicon" x="176" y="114"/><use href="#appicon" x="216" y="114"/><use href="#appicon" x="256" y="114"/><use href="#appicon" x="296" y="114"/><use href="#appicon" x="336" y="114"/>
+          <!-- Row 4 -->
+          <use href="#appicon" x="56" y="156"/><use href="#appicon" x="96" y="156"/><use href="#appicon" x="136" y="156"/><use href="#appicon" x="176" y="156"/><use href="#appicon" x="216" y="156"/><use href="#appicon" x="256" y="156"/><use href="#appicon" x="296" y="156"/><use href="#appicon" x="336" y="156"/>
+          <!-- Row 5 -->
+          <use href="#appicon" x="56" y="198"/><use href="#appicon" x="96" y="198"/><use href="#appicon" x="136" y="198"/><use href="#appicon" x="176" y="198"/><use href="#appicon" x="216" y="198"/><use href="#appicon" x="256" y="198"/><use href="#appicon" x="296" y="198"/><use href="#appicon" x="336" y="198"/>
+        </g>
+        <text x="210" y="147" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="32" fill="#5e5f72" opacity="0.15" font-weight="400">100×</text>
+      </svg>
+    </div>
+    <h2>The platform is <em>not</em> the moat</h2>
+    <p>AI tools, community engines, commerce systems, content platforms — these are commodity capabilities now. <strong>100 well-funded corporations could build a competing platform tomorrow.</strong> Technology alone is not the differentiator.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     CARD 3 — FRAGMENTATION RETURNS
+     ══════════════════════════════════════════════════════════════════════════ -->
+<section class="card" style="background:var(--card-3)">
+  <div class="card-inner">
+    <div class="card-num">02 · The Paradox</div>
+    <div class="card-illust">
+      <svg viewBox="0 0 420 260" xmlns="http://www.w3.org/2000/svg">
+        <!-- Scattered disconnected nodes — chaos -->
+        <g opacity="0.4">
+          <circle cx="67" cy="48" r="4" fill="#ec1c24"/><circle cx="340" cy="52" r="3.5" fill="#1b75bb"/>
+          <circle cx="150" cy="85" r="3" fill="#7b5cd6"/><circle cx="280" cy="78" r="4" fill="#ff3e8e"/>
+          <circle cx="90" cy="160" r="3.5" fill="#5a78f5"/><circle cx="330" cy="170" r="3" fill="#ec1c24"/>
+          <circle cx="200" cy="40" r="3" fill="#1b75bb"/><circle cx="55" cy="210" r="4" fill="#7b5cd6"/>
+          <circle cx="370" cy="110" r="3.5" fill="#5a78f5"/><circle cx="120" cy="130" r="3" fill="#ff3e8e"/>
+          <circle cx="250" cy="200" r="4" fill="#ec1c24"/><circle cx="180" cy="220" r="3" fill="#1b75bb"/>
+          <circle cx="310" cy="230" r="3.5" fill="#7b5cd6"/><circle cx="45" cy="100" r="3" fill="#5a78f5"/>
+          <circle cx="210" cy="130" r="3.5" fill="#ff3e8e"/><circle cx="160" cy="180" r="3" fill="#ec1c24"/>
+          <circle cx="275" cy="130" r="4" fill="#1b75bb"/><circle cx="380" cy="200" r="3" fill="#7b5cd6"/>
+          <circle cx="100" cy="240" r="3.5" fill="#5a78f5"/><circle cx="240" cy="60" r="3" fill="#ff3e8e"/>
+        </g>
+        <!-- No connecting lines — that's the point -->
+        <text x="210" y="140" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="9" fill="#5e5f72" opacity="0.4" letter-spacing="4">NO CENTRE</text>
+      </svg>
+    </div>
+    <h2>If everyone builds it, <em>nobody wins</em></h2>
+    <p>Even if 100 corporations each build the perfect platform — you now have 100 competing destinations for every category. The fragmentation you were solving just recreated itself. <strong>No epicentre forms. No gravity.</strong></p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     CARD 4 — THE DIFFERENTIATOR
+     ══════════════════════════════════════════════════════════════════════════ -->
+<section class="card" style="background:var(--card-4)">
+  <div class="card-inner">
+    <div class="card-num">03 · The Turn</div>
+    <div class="card-illust">
+      <svg viewBox="0 0 420 260" xmlns="http://www.w3.org/2000/svg">
+        <!-- Single beacon pulling everything inward -->
+        <defs>
+          <radialGradient id="beacon" cx="50%" cy="50%">
+            <stop offset="0%" stop-color="#5a78f5" stop-opacity="0.25"/>
+            <stop offset="60%" stop-color="#5a78f5" stop-opacity="0.05"/>
+            <stop offset="100%" stop-color="#5a78f5" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <circle cx="210" cy="130" r="110" fill="url(#beacon)"/>
+        <!-- Arrows converging inward -->
+        <g stroke="#5a78f5" stroke-width="1" opacity="0.35" fill="none">
+          <line x1="60" y1="40" x2="165" y2="100"/><line x1="360" y1="50" x2="255" y2="105"/>
+          <line x1="40" y1="200" x2="160" y2="155"/><line x1="380" y1="210" x2="260" y2="158"/>
+          <line x1="210" y1="15" x2="210" y2="85"/><line x1="210" y1="245" x2="210" y2="175"/>
+          <line x1="80" y1="120" x2="160" y2="125"/><line x1="340" y1="135" x2="260" y2="132"/>
+        </g>
+        <circle cx="210" cy="130" r="7" fill="#5a78f5" opacity="0.9"/>
+        <circle cx="210" cy="130" r="18" fill="none" stroke="#5a78f5" stroke-width="0.8" opacity="0.3">
+          <animate attributeName="r" values="18;24;18" dur="3s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0.3;0.1;0.3" dur="3s" repeatCount="indefinite"/>
+        </circle>
+      </svg>
+    </div>
+    <h2>When everything else is equal, gravity comes from <em>the address</em></h2>
+    <p>Same funding. Same AI. Same engineering talent. Same user tools. So what creates the pull? <strong>The destination itself.</strong> The name. The brand. The place where attention naturally settles.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     CARD 5 — URL COMPARISON
+     ══════════════════════════════════════════════════════════════════════════ -->
+<section class="card" style="background:var(--card-5)">
+  <div class="card-inner">
+    <div class="card-num">04 · The Proof</div>
+    <h2>Put them side by side</h2>
+    <div class="url-compare">
+      <div class="url-ugly">meta.com/verticals/beauty/community/feed?category=skincare&region=uk</div>
+      <div class="url-ugly">x.com/i/categories/beauty-and-wellness/trending/posts</div>
+      <div class="url-ugly">google.com/destinations/beauty/brands/directory?filter=active</div>
+      <div class="url-ugly">tiktok.com/discover/beauty-hub?source=category_nav&ref=browse</div>
+      <div class="url-ugly">amazon.com/s?k=beauty&rh=n%3A3760911&ref=beauty_hub_v2</div>
+      <div class="url-clean">BeautyXX.com</div>
+    </div>
+    <p>One of these is a destination. The rest are <strong>features inside someone else's platform.</strong> Where does gravity form?</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     CARD 6 — DOMAINS ARE BEDROCK
+     ══════════════════════════════════════════════════════════════════════════ -->
+<section class="card" style="background:var(--card-6)">
+  <div class="card-inner">
+    <div class="card-num">05 · The Foundation</div>
+    <div class="card-illust">
+      <svg viewBox="0 0 420 260" xmlns="http://www.w3.org/2000/svg">
+        <!-- Timeline: platforms crossed out, domains remain -->
+        <line x1="60" y1="130" x2="360" y2="130" stroke="#2a2b3d" stroke-width="1"/>
+        <!-- Fallen platforms -->
+        <g font-family="'IBM Plex Mono',monospace" font-size="10" opacity="0.25">
+          <text x="80" y="90" fill="#ec1c24" text-anchor="middle">MySpace</text>
+          <line x1="60" y1="87" x2="100" y2="87" stroke="#ec1c24" stroke-width="0.8"/>
+          <text x="150" y="72" fill="#ff3e8e" text-anchor="middle">Vine</text>
+          <line x1="136" y1="69" x2="164" y2="69" stroke="#ff3e8e" stroke-width="0.8"/>
+          <text x="220" y="85" fill="#7b5cd6" text-anchor="middle">Google+</text>
+          <line x1="200" y1="82" x2="240" y2="82" stroke="#7b5cd6" stroke-width="0.8"/>
+          <text x="290" y="75" fill="#5a78f5" text-anchor="middle">Friendster</text>
+          <line x1="264" y1="72" x2="316" y2="72" stroke="#5a78f5" stroke-width="0.8"/>
+        </g>
+        <!-- Domains still standing -->
+        <g font-family="'IBM Plex Mono',monospace" font-size="11" fill="#e4e4ec" opacity="0.7">
+          <text x="100" y="175" text-anchor="middle">.com</text>
+          <text x="210" y="175" text-anchor="middle">.com</text>
+          <text x="320" y="175" text-anchor="middle">.com</text>
+        </g>
+        <g opacity="0.5">
+          <circle cx="100" cy="168" r="2" fill="#5a78f5"/><circle cx="210" cy="168" r="2" fill="#5a78f5"/><circle cx="320" cy="168" r="2" fill="#5a78f5"/>
+        </g>
+        <text x="210" y="220" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="9" fill="#5e5f72" opacity="0.35" letter-spacing="3">STILL HERE</text>
+      </svg>
+    </div>
+    <h2>Platforms come and go. <em>Domains are forever.</em></h2>
+    <p>Social networks rise and fall. Algorithms change overnight. But domains are the mapping nodes of the internet itself — <strong>digital real estate that has persisted since the beginning</strong> and will persist long after everything else has been reinvented.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     CARD 7 — WHY NOT TOP-TIER?
+     ══════════════════════════════════════════════════════════════════════════ -->
+<section class="card" style="background:var(--card-7)">
+  <div class="card-inner">
+    <div class="card-num">06 · The Hierarchy</div>
+    <div class="card-illust">
+      <svg viewBox="0 0 420 260" xmlns="http://www.w3.org/2000/svg">
+        <!-- Scattered puzzle pieces that don't connect -->
+        <g font-family="'IBM Plex Mono',monospace" font-size="11" fill="#5e5f72" opacity="0.4">
+          <text x="65" y="55" transform="rotate(-8 65 55)">Car.com</text>
+          <text x="250" y="48" transform="rotate(5 250 48)">Beauty.com</text>
+          <text x="140" y="110" transform="rotate(-3 140 110)">Music.com</text>
+          <text x="300" y="120" transform="rotate(7 300 120)">Travel.com</text>
+          <text x="80" y="170" transform="rotate(4 80 170)">Food.com</text>
+          <text x="260" y="190" transform="rotate(-6 260 190)">Sport.com</text>
+          <text x="170" y="230" transform="rotate(3 170 230)">Tech.com</text>
+          <text x="330" y="235" transform="rotate(-4 330 235)">Art.com</text>
+        </g>
+        <!-- Red X over the collection -->
+        <line x1="100" y1="60" x2="320" y2="200" stroke="#ec1c24" stroke-width="1.5" opacity="0.2"/>
+        <line x1="320" y1="60" x2="100" y2="200" stroke="#ec1c24" stroke-width="1.5" opacity="0.2"/>
+        <text x="210" y="145" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="9" fill="#ec1c24" opacity="0.35" letter-spacing="3">10,000 OWNERS</text>
+      </svg>
+    </div>
+    <h2>Why not Car.com? Beauty.com? <em>Because they can't be unified.</em></h2>
+    <p>The ultimate single-word domains are scattered across thousands of different owners. Different intentions. Different prices. No branding system. <strong>No single entity could ever assemble them into a network.</strong> They're ruled out.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     CARD 8 — THE XX SYSTEM
+     ══════════════════════════════════════════════════════════════════════════ -->
+<section class="card" style="background:var(--card-8)">
+  <div class="card-inner">
+    <div class="card-num">07 · The Solution</div>
+    <div class="card-illust">
+      <svg viewBox="0 0 420 260" xmlns="http://www.w3.org/2000/svg">
+        <!-- Connected constellation — XX nodes -->
+        <defs>
+          <linearGradient id="g8" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#ec1c24"/><stop offset="50%" stop-color="#7b5cd6"/><stop offset="100%" stop-color="#1b75bb"/>
+          </linearGradient>
+        </defs>
+        <!-- Connecting lines -->
+        <g stroke="url(#g8)" stroke-width="0.6" opacity="0.25">
+          <line x1="210" y1="130" x2="110" y2="60"/><line x1="210" y1="130" x2="310" y2="55"/>
+          <line x1="210" y1="130" x2="80" y2="150"/><line x1="210" y1="130" x2="340" y2="155"/>
+          <line x1="210" y1="130" x2="130" y2="220"/><line x1="210" y1="130" x2="290" y2="215"/>
+          <line x1="110" y1="60" x2="310" y2="55"/><line x1="80" y1="150" x2="130" y2="220"/>
+          <line x1="340" y1="155" x2="290" y2="215"/><line x1="310" y1="55" x2="340" y2="155"/>
+          <line x1="110" y1="60" x2="80" y2="150"/><line x1="130" y1="220" x2="290" y2="215"/>
+        </g>
+        <!-- Nodes with labels -->
+        <g font-family="'IBM Plex Mono',monospace" font-size="9" fill="#e4e4ec" opacity="0.65">
+          <circle cx="110" cy="60" r="4" fill="#ec1c24" opacity="0.7"/><text x="110" y="48">ClimbXX</text>
+          <circle cx="310" cy="55" r="4" fill="#1b75bb" opacity="0.7"/><text x="310" y="43">TechXX</text>
+          <circle cx="80" cy="150" r="4" fill="#7b5cd6" opacity="0.7"/><text x="50" y="143">ArtXX</text>
+          <circle cx="340" cy="155" r="4" fill="#ff3e8e" opacity="0.7"/><text x="340" y="143">FoodXX</text>
+          <circle cx="130" cy="220" r="4" fill="#5a78f5" opacity="0.7"/><text x="115" y="240">BeautyXX</text>
+          <circle cx="290" cy="215" r="4" fill="#ec1c24" opacity="0.7"/><text x="285" y="237">FinanceXX</text>
+        </g>
+        <!-- Hub -->
+        <circle cx="210" cy="130" r="8" fill="url(#g8)" opacity="0.8"/>
+        <circle cx="210" cy="130" r="16" fill="none" stroke="url(#g8)" stroke-width="0.6" opacity="0.2">
+          <animate attributeName="r" values="16;22;16" dur="4s" repeatCount="indefinite"/>
+        </circle>
+        <text x="210" y="134" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="7" fill="#fff" opacity="0.9" letter-spacing="2">XX</text>
+      </svg>
+    </div>
+    <h2>One system. One network. <em>Instantly recognisable.</em></h2>
+    <p>English-language single-word domains, unified by a consistent naming convention that signals "this is part of the same ecosystem" the moment you see it. <strong>ClimbXX. FinanceXX. BeautyXX.</strong> Connected nodes in a single constellation. No other collection like this exists.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     CARD 9 — MODULAR INFINITY
+     ══════════════════════════════════════════════════════════════════════════ -->
+<section class="card" style="background:var(--card-9)">
+  <div class="card-inner">
+    <div class="card-num">08 · The Freedom</div>
+    <div class="card-illust">
+      <svg viewBox="0 0 420 260" xmlns="http://www.w3.org/2000/svg">
+        <!-- Central node radiating outward in all directions -->
+        <defs>
+          <radialGradient id="exp" cx="50%" cy="50%">
+            <stop offset="0%" stop-color="#5a78f5" stop-opacity="0.14"/>
+            <stop offset="100%" stop-color="#5a78f5" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <circle cx="210" cy="130" r="120" fill="url(#exp)"/>
+        <!-- Ring 1 branches — 6 directions -->
+        <g stroke="#5a78f5" stroke-width="0.7" opacity="0.25">
+          <line x1="210" y1="130" x2="130" y2="55"/>
+          <line x1="210" y1="130" x2="290" y2="50"/>
+          <line x1="210" y1="130" x2="320" y2="130"/>
+          <line x1="210" y1="130" x2="290" y2="210"/>
+          <line x1="210" y1="130" x2="130" y2="205"/>
+          <line x1="210" y1="130" x2="100" y2="130"/>
+        </g>
+        <!-- Ring 1 nodes -->
+        <g opacity="0.5">
+          <circle cx="130" cy="55" r="3.5" fill="#7b5cd6"/>
+          <circle cx="290" cy="50" r="3.5" fill="#7b5cd6"/>
+          <circle cx="320" cy="130" r="3.5" fill="#7b5cd6"/>
+          <circle cx="290" cy="210" r="3.5" fill="#7b5cd6"/>
+          <circle cx="130" cy="205" r="3.5" fill="#7b5cd6"/>
+          <circle cx="100" cy="130" r="3.5" fill="#7b5cd6"/>
+        </g>
+        <!-- Ring 2 branches — extending further out -->
+        <g stroke="#5a78f5" stroke-width="0.5" opacity="0.15">
+          <line x1="130" y1="55" x2="85" y2="20"/><line x1="130" y1="55" x2="100" y2="30"/>
+          <line x1="290" y1="50" x2="335" y2="18"/><line x1="290" y1="50" x2="320" y2="28"/>
+          <line x1="320" y1="130" x2="370" y2="105"/><line x1="320" y1="130" x2="372" y2="152"/>
+          <line x1="290" y1="210" x2="330" y2="240"/><line x1="290" y1="210" x2="315" y2="242"/>
+          <line x1="130" y1="205" x2="95" y2="240"/><line x1="130" y1="205" x2="105" y2="242"/>
+          <line x1="100" y1="130" x2="52" y2="108"/><line x1="100" y1="130" x2="50" y2="152"/>
+        </g>
+        <!-- Ring 2 nodes -->
+        <g opacity="0.3">
+          <circle cx="85" cy="20" r="2.5" fill="#ff3e8e"/><circle cx="100" cy="30" r="2" fill="#ff3e8e"/>
+          <circle cx="335" cy="18" r="2.5" fill="#ff3e8e"/><circle cx="320" cy="28" r="2" fill="#ff3e8e"/>
+          <circle cx="370" cy="105" r="2.5" fill="#ff3e8e"/><circle cx="372" cy="152" r="2" fill="#ff3e8e"/>
+          <circle cx="330" cy="240" r="2.5" fill="#ff3e8e"/><circle cx="315" cy="242" r="2" fill="#ff3e8e"/>
+          <circle cx="95" cy="240" r="2.5" fill="#ff3e8e"/><circle cx="105" cy="242" r="2" fill="#ff3e8e"/>
+          <circle cx="52" cy="108" r="2.5" fill="#ff3e8e"/><circle cx="50" cy="152" r="2" fill="#ff3e8e"/>
+        </g>
+        <!-- Ring 3 — faintest, at the edges -->
+        <g stroke="#5a78f5" stroke-width="0.3" opacity="0.08">
+          <line x1="85" y1="20" x2="60" y2="5"/><line x1="335" y1="18" x2="365" y2="3"/>
+          <line x1="370" y1="105" x2="400" y2="90"/><line x1="372" y1="152" x2="405" y2="168"/>
+          <line x1="330" y1="240" x2="355" y2="255"/><line x1="95" y1="240" x2="70" y2="255"/>
+          <line x1="52" y1="108" x2="25" y2="92"/><line x1="50" y1="152" x2="22" y2="168"/>
+        </g>
+        <g opacity="0.15">
+          <circle cx="60" cy="5" r="1.5" fill="#ec1c24"/><circle cx="365" cy="3" r="1.5" fill="#ec1c24"/>
+          <circle cx="400" cy="90" r="1.5" fill="#ec1c24"/><circle cx="405" cy="168" r="1.5" fill="#ec1c24"/>
+          <circle cx="355" cy="255" r="1.5" fill="#ec1c24"/><circle cx="70" cy="255" r="1.5" fill="#ec1c24"/>
+          <circle cx="25" cy="92" r="1.5" fill="#ec1c24"/><circle cx="22" cy="168" r="1.5" fill="#ec1c24"/>
+        </g>
+        <!-- Central node -->
+        <circle cx="210" cy="130" r="8" fill="#5a78f5" opacity="0.85"/>
+        <text x="210" y="115" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="10" fill="#e4e4ec" opacity="0.7">FinanceXX</text>
+      </svg>
+    </div>
+    <h2>Each domain becomes <em>its own world</em></h2>
+    <p>Every XX gateway establishes itself as a federated micro-brand — forever optimising, forever evolving, expanding without constraints. <strong>A beacon. A node. A place where everything related naturally converges.</strong> FinanceXX doesn't just cover finance — it becomes finance. And it does this while staying connected to thousands of others doing the same.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════════════════
+     CARD 10 — THE WINDOW IS CLOSED
+     ══════════════════════════════════════════════════════════════════════════ -->
+<section class="card" style="background:var(--card-10)">
+  <div class="card-inner">
+    <div class="card-num">09 · The Truth</div>
+    <div class="card-illust">
+      <svg viewBox="0 0 420 260" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="g10" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#ec1c24"/><stop offset="50%" stop-color="#7b5cd6"/><stop offset="100%" stop-color="#1b75bb"/>
+          </linearGradient>
+          <radialGradient id="glow10" cx="50%" cy="50%">
+            <stop offset="0%" stop-color="#5a78f5" stop-opacity="0.15"/>
+            <stop offset="100%" stop-color="#5a78f5" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <circle cx="210" cy="110" r="100" fill="url(#glow10)"/>
+        <!-- Constellation of connected nodes — the full picture -->
+        <g stroke="url(#g10)" stroke-width="0.5" opacity="0.2">
+          <line x1="210" y1="110" x2="130" y2="60"/><line x1="210" y1="110" x2="290" y2="55"/>
+          <line x1="210" y1="110" x2="100" y2="130"/><line x1="210" y1="110" x2="320" y2="135"/>
+          <line x1="210" y1="110" x2="145" y2="180"/><line x1="210" y1="110" x2="275" y2="175"/>
+          <line x1="130" y1="60" x2="290" y2="55"/><line x1="100" y1="130" x2="145" y2="180"/>
+          <line x1="320" y1="135" x2="275" y2="175"/><line x1="130" y1="60" x2="100" y2="130"/>
+          <line x1="290" y1="55" x2="320" y2="135"/><line x1="145" y1="180" x2="275" y2="175"/>
+        </g>
+        <g opacity="0.5">
+          <circle cx="130" cy="60" r="3" fill="#ec1c24"/><circle cx="290" cy="55" r="3" fill="#1b75bb"/>
+          <circle cx="100" cy="130" r="3" fill="#7b5cd6"/><circle cx="320" cy="135" r="3" fill="#ff3e8e"/>
+          <circle cx="145" cy="180" r="3" fill="#5a78f5"/><circle cx="275" cy="175" r="3" fill="#ec1c24"/>
+        </g>
+        <circle cx="210" cy="110" r="6" fill="url(#g10)" opacity="0.7">
+          <animate attributeName="r" values="6;9;6" dur="3s" repeatCount="indefinite"/>
+        </circle>
+        <!-- Stats below -->
+        <g font-family="'IBM Plex Mono',monospace" text-anchor="middle" opacity="0.5">
+          <text x="105" y="230" font-size="18" fill="#5a78f5">10,000+</text>
+          <text x="105" y="245" font-size="8" fill="#5e5f72" letter-spacing="2">DOMAINS</text>
+          <text x="210" y="230" font-size="18" fill="#7b5cd6">45</text>
+          <text x="210" y="245" font-size="8" fill="#5e5f72" letter-spacing="2">CATEGORIES</text>
+          <text x="315" y="230" font-size="18" fill="#ec1c24">14 yrs</text>
+          <text x="315" y="245" font-size="8" fill="#5e5f72" letter-spacing="2">ASSEMBLED</text>
+        </g>
+      </svg>
+    </div>
+    <h2>The constellation is <em>assembled.</em></h2>
+    <p>14 years. 10,000+ domains. 45 categories. A network of beacons — each one a micro-brand, a gravitational anchor, a destination that will only grow stronger with time. <strong>This collection can never be assembled again.</strong> The organizing layer is ready. It just needs its commander.</p>
+    <a href="vision.html" class="cta-btn">Explore the Full Vision →</a>
+  </div>
+</section>
+
+<script>
+// ── Progress dots ─────────────────────────────────────────────────────────
+const cards = document.querySelectorAll('.card');
+const prog  = document.getElementById('progress');
+
+cards.forEach((_,i) => {
+  const dot = document.createElement('button');
+  dot.className = 'progress-dot';
+  dot.setAttribute('aria-label', `Card ${i+1}`);
+  dot.onclick = () => cards[i].scrollIntoView({behavior:'smooth'});
+  prog.appendChild(dot);
+});
+
+const dots = document.querySelectorAll('.progress-dot');
+
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const idx = [...cards].indexOf(e.target);
+      dots.forEach((d,i) => d.classList.toggle('active', i===idx));
+    }
+  });
+}, {threshold:0.55});
+
+cards.forEach(c => obs.observe(c));
+
+// ── Scroll-triggered fade-in ──────────────────────────────────────────────
+const fadeObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.style.opacity = '1';
+      e.target.style.transform = 'translateY(0)';
+    }
+  });
+}, {threshold:0.3});
+
+document.querySelectorAll('.card-inner').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(30px)';
+  el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+  fadeObs.observe(el);
+});
+</script>
+</body>
+</html>
