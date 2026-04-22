@@ -181,6 +181,92 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
   background-clip: text;
   letter-spacing: 0.3px;
 }
+.vision-cta {
+  display: block;
+  margin-top: 32px;
+  padding: 32px 36px;
+  background: linear-gradient(135deg, rgba(59,92,238,0.06), rgba(123,92,214,0.04), rgba(255,62,142,0.02));
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+.vision-cta::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 2px;
+  background: linear-gradient(90deg, var(--coral), var(--purple), var(--accent));
+  opacity: 0.7;
+}
+.vision-cta::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  box-shadow: inset 0 0 40px rgba(59,92,238,0.04);
+  pointer-events: none;
+  transition: box-shadow 0.3s;
+}
+.vision-cta:hover {
+  border-color: var(--border-hover);
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, rgba(59,92,238,0.10), rgba(123,92,214,0.07), rgba(255,62,142,0.04));
+}
+.vision-cta:hover::after {
+  box-shadow: inset 0 0 60px rgba(59,92,238,0.08);
+}
+.vision-cta-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--coral);
+  font-weight: 600;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.vision-cta-label::before {
+  content: '';
+  width: 6px; height: 6px;
+  background: var(--coral);
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+.vision-cta h3 {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  letter-spacing: -0.2px;
+}
+.vision-cta h3 em {
+  font-style: italic;
+  background: linear-gradient(135deg, var(--coral), var(--purple), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.vision-cta p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  max-width: 600px;
+}
+.vision-cta-arrow {
+  position: absolute;
+  top: 32px; right: 32px;
+  color: var(--text-muted);
+  font-size: 18px;
+  transition: all 0.3s;
+}
+.vision-cta:hover .vision-cta-arrow {
+  color: var(--accent-light);
+  transform: translateX(4px);
+}
 
 /* ── Opportunity Section ── */
 .opp-header { text-align: center; margin-bottom: 48px; padding-top: 20px; }
@@ -858,6 +944,12 @@ init();
 </html>" title="GENEXXO Vision Animation" loading="lazy"></iframe>
       </div>
       <p class="vision-caption">One hub. Thousands of gateways. One organizing layer.</p>
+      <a href="ultimate-asset.html" class="vision-cta">
+        <span class="vision-cta-arrow">&rarr;</span>
+        <div class="vision-cta-label">The Defining Argument</div>
+        <h3>There Can Only Be <em>One</em> Organizing Layer</h3>
+        <p>The logic that eliminates every alternative &mdash; and reveals why the GENEXXO Collection is the only asset that can deliver it.</p>
+      </a>
     </section>
 
     <!-- ── Strategic Corporate Opportunity ── -->
