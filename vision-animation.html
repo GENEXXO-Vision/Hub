@@ -52,15 +52,33 @@
   #hub.show #hub-sub { opacity:1; }
 
   .corner.br { bottom:16px; right:16px; border-bottom:1px solid #b48cdc; border-right:1px solid #b48cdc; }
-  #fade-overlay {
-    position:absolute; inset:0;
-    background:#000;
-    z-index:50;
+
+  #replay-btn {
+    position:absolute;
+    bottom:20px; right:20px;
+    font-family:'Share Tech Mono', monospace;
+    font-size:9px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    color:rgba(180,160,220,0.3);
+    border:1px solid rgba(180,160,220,0.12);
+    padding:7px 16px;
+    cursor:pointer;
+    background:transparent;
+    z-index:60;
     opacity:0;
     pointer-events:none;
-    transition: opacity 2s ease;
+    transition:all 0.6s ease;
   }
-  #fade-overlay.fade { opacity:1; }
+  #replay-btn.show {
+    opacity:1;
+    pointer-events:all;
+  }
+  #replay-btn:hover {
+    color:rgba(200,180,255,0.65);
+    border-color:rgba(200,180,255,0.3);
+    background:rgba(180,160,220,0.05);
+  }
 </style>
 </head>
 <body>
@@ -72,13 +90,12 @@
     <div id="hub-sub">HUB</div>
   </div>
 </div>
-<div id="fade-overlay"></div>
+<button id="replay-btn" onclick="restartAnimation()">↺ Replay</button>
 
 <script>
 const canvas = document.getElementById('c');
 const ctx = canvas.getContext('2d');
 const hubEl  = document.getElementById('hub');
-const fadeEl = document.getElementById('fade-overlay');
 
 let W, H, CX, CY, raf;
 function resize() {
@@ -87,7 +104,22 @@ function resize() {
   CX = W/2; CY = H/2;
 }
 resize();
-window.addEventListener('resize', () => { resize(); init(); });
+window.addEventListener('resize', () => { resize(); // Show replay button after animation settles
+const replayBtn = document.getElementById('replay-btn');
+
+function restartAnimation() {
+  replayBtn.classList.remove('show');
+  init();
+}
+
+// Check each frame if we should show replay
+function checkReplay(el) {
+  if (el > PT.STAR + 12 && !replayBtn.classList.contains('show')) {
+    replayBtn.classList.add('show');
+  }
+}
+
+init(); });
 
 // ── ASSETS ──────────────────────────────────────────────────────────────────
 const xxImg = new Image();
@@ -104,9 +136,8 @@ const PAL = [
 
 // ── PHASE TIMING ─────────────────────────────────────────────────────────────
 const PT = { HUB:3, DEPLOY:6, STAR:20 };
-// ── LOOP TIMING: full cycle with 5s hold at constellation + 2s fade ────────
-const FADE_START = PT.STAR + 16;  // 36s: all labels in by ~31s, then 5s hold
-const RESET_AT   = FADE_START + 2; // 38s: fade finished, restart the cycle
+// ── EMBED MODE: play once, no loop ────────────────────────────────────────
+let frameSkip = 0;
 
 // ── SECTORS ──────────────────────────────────────────────────────────────────
 const SECTORS = [
@@ -508,17 +539,30 @@ function frame() {
     });
   }
 
-  // ── Loop: trigger fade at FADE_START, reset at RESET_AT ────────────────────
-  if (el >= FADE_START && el < RESET_AT) {
-    if (!fadeEl.classList.contains('fade')) fadeEl.classList.add('fade');
-  }
-  if (el >= RESET_AT) {
-    fadeEl.classList.remove('fade');  // overlay fades back to transparent over new cycle
-    init();
-    return;
+  checkReplay(el);
+
+  // ── Throttle after settling: skip 2 of every 3 frames to save CPU ─────────
+  if (el > PT.STAR + 12) {
+    frameSkip++;
+    if (frameSkip % 3 !== 0) { raf=requestAnimationFrame(frame); return; }
   }
 
   raf=requestAnimationFrame(frame);
+}
+
+// Show replay button after animation settles
+const replayBtn = document.getElementById('replay-btn');
+
+function restartAnimation() {
+  replayBtn.classList.remove('show');
+  init();
+}
+
+// Check each frame if we should show replay
+function checkReplay(el) {
+  if (el > PT.STAR + 12 && !replayBtn.classList.contains('show')) {
+    replayBtn.classList.add('show');
+  }
 }
 
 init();
