@@ -55,16 +55,17 @@
 
   #replay-btn {
     position:absolute;
-    bottom:20px; right:20px;
+    bottom:24px; right:24px;
     font-family:'Share Tech Mono', monospace;
-    font-size:9px;
+    font-size:11px;
     letter-spacing:3px;
     text-transform:uppercase;
-    color:rgba(180,160,220,0.3);
-    border:1px solid rgba(180,160,220,0.12);
-    padding:7px 16px;
+    color:rgba(220,210,255,0.85);
+    border:1px solid rgba(90,120,245,0.35);
+    padding:10px 22px;
     cursor:pointer;
-    background:transparent;
+    background:rgba(90,120,245,0.08);
+    border-radius:8px;
     z-index:60;
     opacity:0;
     pointer-events:none;
@@ -73,11 +74,17 @@
   #replay-btn.show {
     opacity:1;
     pointer-events:all;
+    animation: replayPulse 2.5s ease-in-out infinite;
   }
   #replay-btn:hover {
-    color:rgba(200,180,255,0.65);
-    border-color:rgba(200,180,255,0.3);
-    background:rgba(180,160,220,0.05);
+    color:#fff;
+    border-color:rgba(90,120,245,0.7);
+    background:rgba(90,120,245,0.18);
+    box-shadow:0 0 20px rgba(90,120,245,0.2);
+  }
+  @keyframes replayPulse {
+    0%,100% { box-shadow:0 0 8px rgba(90,120,245,0.1); }
+    50%     { box-shadow:0 0 18px rgba(90,120,245,0.25); }
   }
 </style>
 </head>
