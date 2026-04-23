@@ -136,8 +136,7 @@ const PAL = [
 
 // ── PHASE TIMING ─────────────────────────────────────────────────────────────
 const PT = { HUB:3, DEPLOY:6, STAR:20 };
-// ── EMBED MODE: play once, no loop ────────────────────────────────────────
-let frameSkip = 0;
+// ── EMBED MODE: play once, freeze after settling ─────────────────────────
 
 // ── SECTORS ──────────────────────────────────────────────────────────────────
 const SECTORS = [
@@ -541,10 +540,11 @@ function frame() {
 
   checkReplay(el);
 
-  // ── Throttle after settling: skip 2 of every 3 frames to save CPU ─────────
-  if (el > PT.STAR + 12) {
-    frameSkip++;
-    if (frameSkip % 3 !== 0) { raf=requestAnimationFrame(frame); return; }
+  // ── After constellation settles: stop rendering entirely — zero CPU ────────
+  if (el > PT.STAR + 13) {
+    // Final frame rendered. Canvas holds the last state as a static image.
+    // Replay button is visible. No more requestAnimationFrame calls.
+    return;
   }
 
   raf=requestAnimationFrame(frame);
