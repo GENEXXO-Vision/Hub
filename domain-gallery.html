@@ -2,27 +2,361 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Domain Gallery — Knowledge Hub</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Domain Gallery — GENEXXO Collection</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@300;400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--bg-primary:#f9f8f6;--bg-secondary:#fcfbf9;--bg-sidebar:#111118;--border:rgba(59,92,238,0.09);--border-mid:rgba(59,92,238,0.13);--border-hover:rgba(59,92,238,0.28);--border-dark:rgba(59,92,238,0.12);--text-primary:#1a1a2e;--text-secondary:#5a5b6e;--text-muted:#908e9a;--accent:#3b5cee;--accent-light:#5a78f5;--accent-glow:rgba(59,92,238,0.07);--purple:#7b5cd6;--purple-light:#9478e0;--font-body:'DM Sans',-apple-system,sans-serif;--font-mono:'Space Mono',monospace}*{margin:0;padding:0;box-sizing:border-box}body{background:var(--bg-primary);color:var(--text-primary);font-family:var(--font-body);line-height:1.75}.topbar{position:fixed;top:0;left:0;right:0;height:56px;background:rgba(252,251,249,0.9);backdrop-filter:blur(16px);border-bottom:1px solid var(--border-mid);z-index:200;display:flex;align-items:center;padding:0 32px;gap:16px}.topbar-menu{width:36px;height:36px;background:0 0;border:1px solid var(--border-mid);border-radius:8px;color:var(--text-secondary);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;transition:all .2s;flex-shrink:0}.topbar-menu:hover{border-color:var(--border-hover);color:var(--text-primary);background:var(--accent-glow)}.topbar-xx{width:28px;height:22px;flex-shrink:0}.topbar-xx svg{width:100%;height:100%;display:block}.topbar-label{font-family:var(--font-mono);font-size:11px;letter-spacing:2px;color:var(--text-muted);text-transform:uppercase}.sidebar-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:299;opacity:0;pointer-events:none;transition:opacity .3s}.sidebar-overlay.open{opacity:1;pointer-events:all}.sidebar{position:fixed;top:0;left:0;width:300px;height:100vh;background:var(--bg-sidebar);border-right:1px solid var(--border-dark);z-index:300;display:flex;flex-direction:column;overflow-y:auto;transform:translateX(-100%);transition:transform .3s ease}.sidebar.open{transform:translateX(0)}.sidebar-header{padding:24px 24px 20px;border-bottom:1px solid var(--border-dark);display:flex;align-items:center;justify-content:space-between}.sidebar-header-left{display:flex;align-items:center;gap:14px}.sidebar-xx-mark{width:36px;height:28px;flex-shrink:0}.sidebar-xx-mark svg{width:100%;height:100%;display:block}.sidebar-subtitle{font-size:12px;color:#9394a5;letter-spacing:2px;text-transform:uppercase;font-family:var(--font-mono);font-weight:500}.sidebar-close{width:32px;height:32px;background:0 0;border:1px solid var(--border-dark);border-radius:8px;color:#5e5f72;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center}.sidebar-close:hover{color:#e8e8ed}.sidebar nav{padding:16px 0;flex:1}.nav-item{display:block;padding:10px 24px;color:#9394a5;text-decoration:none;font-size:14px;border-left:2px solid transparent;transition:all .2s}.nav-item:hover{color:#e8e8ed;background:rgba(59,92,238,.15);border-left-color:var(--accent)}.nav-item.active{color:var(--accent-light);font-weight:600;background:rgba(59,92,238,.15);border-left-color:var(--accent)}.nav-group-label{padding:20px 24px 6px;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#5e5f72;font-weight:600}.nav-sub{padding-left:40px;font-size:13px}.main{min-height:100vh;padding-top:56px}.breadcrumb-bar{padding:14px 56px;border-bottom:1px solid var(--border);font-size:13px;color:var(--text-muted);display:flex;align-items:center;gap:8px;background:var(--bg-secondary)}.breadcrumb-bar a{color:var(--accent);text-decoration:none;font-weight:500}.placeholder{padding:80px 56px;max-width:820px;text-align:center}.placeholder h1{font-size:36px;font-weight:700;margin-bottom:12px}.placeholder h1 em{font-style:normal;background:linear-gradient(135deg,#ec1c24,#2a265e,#1b75bb);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}.placeholder p{font-size:16px;color:var(--text-secondary);margin-bottom:24px}.placeholder .badge{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;background:rgba(123,92,214,.08);border:1px solid rgba(123,92,214,.2);border-radius:100px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--purple);font-weight:600;margin-bottom:28px}.footer{padding:28px 56px;border-top:1px solid var(--border)}.footer-company{font-size:12px;color:var(--text-muted);text-align:center}.footer-company strong{color:var(--text-secondary);font-weight:500}@media(max-width:768px){.topbar{padding:0 16px}.placeholder{padding:60px 24px}.breadcrumb-bar{padding:12px 24px}.footer{padding:24px}}
+:root {
+  --bg: #08080d;
+  --text: #e4e4ec;
+  --text-dim: #8a8b9e;
+  --text-muted: #55566a;
+  --accent: #5a78f5;
+  --red: #ec1c24;
+  --blue: #1b75bb;
+  --purple: #7b5cd6;
+  --coral: #ff3e8e;
+  --serif: 'Instrument Serif', Georgia, serif;
+  --mono: 'IBM Plex Mono', monospace;
+  --sans: 'DM Sans', sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-snap-type:y mandatory;scroll-behavior:smooth;overflow-x:hidden;}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);}
+
+.card{
+  min-height:100dvh;
+  scroll-snap-align:start;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  position:relative;
+  overflow:hidden;
+}
+
+.card-hero{padding:0;}
+.card-hero img{
+  width:100%;
+  height:100dvh;
+  object-fit:cover;
+  object-position:center;
+  display:block;
+}
+
+.card-domains{
+  padding:60px 32px;
+  background:var(--bg);
+}
+.card-domains-inner{
+  max-width:540px;
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  gap:32px;
+}
+.card-domains-header{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:8px;
+}
+.card-domains-cat{
+  font-family:var(--mono);
+  font-size:10px;
+  font-weight:300;
+  letter-spacing:4px;
+  color:var(--text-muted);
+  text-transform:uppercase;
+}
+.card-domains-title{
+  font-family:var(--serif);
+  font-size:clamp(24px,4vw,36px);
+  font-weight:400;
+  letter-spacing:-0.3px;
+}
+.card-domains-title em{font-style:italic;color:var(--accent);}
+.card-domains-count{
+  font-family:var(--mono);
+  font-size:11px;
+  color:var(--text-muted);
+  letter-spacing:1px;
+}
+
+.pill-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  width:100%;
+  max-width:460px;
+}
+.pill{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:14px 18px;
+  border-radius:12px;
+  background:rgba(255,255,255,0.02);
+  border:1px solid rgba(255,255,255,0.06);
+  transition:all 0.3s ease;
+  position:relative;
+  overflow:hidden;
+}
+.pill:hover{
+  background:rgba(255,255,255,0.04);
+  border-color:rgba(255,255,255,0.1);
+  transform:translateY(-1px);
+}
+.pill::before{
+  content:\'\';
+  position:absolute;
+  left:0;top:0;bottom:0;
+  width:3px;
+  border-radius:3px 0 0 3px;
+}
+.pill-dot{
+  width:8px;height:8px;
+  border-radius:50%;
+  flex-shrink:0;
+  box-shadow:0 0 8px currentColor;
+  opacity:0.7;
+}
+.pill-name{
+  font-family:var(--mono);
+  font-size:clamp(12px,2vw,14px);
+  font-weight:400;
+  color:var(--text);
+  letter-spacing:0.5px;
+}
+.pill-suffix{
+  color:var(--text-muted);
+  font-weight:300;
+}
+
+.pill.c1::before{background:var(--red);}     .pill.c1 .pill-dot{color:var(--red);}
+.pill.c2::before{background:var(--coral);}    .pill.c2 .pill-dot{color:var(--coral);}
+.pill.c3::before{background:var(--purple);}   .pill.c3 .pill-dot{color:var(--purple);}
+.pill.c4::before{background:var(--accent);}   .pill.c4 .pill-dot{color:var(--accent);}
+.pill.c5::before{background:var(--blue);}     .pill.c5 .pill-dot{color:var(--blue);}
+.pill.c6::before{background:#34d399;}         .pill.c6 .pill-dot{color:#34d399;}
+
+.card-title{
+  padding:60px 32px;
+  background:var(--bg);
+}
+.card-title-inner{
+  max-width:640px;
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  gap:24px;
+}
+.card-title-inner h1{
+  font-family:var(--serif);
+  font-size:clamp(32px,6vw,52px);
+  font-weight:400;
+  line-height:1.15;
+}
+.card-title-inner h1 .grad{
+  background:linear-gradient(135deg,var(--red),var(--purple),var(--blue));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.card-title-inner p{
+  font-size:clamp(15px,2.2vw,17px);
+  line-height:1.8;
+  color:var(--text-dim);
+  font-weight:300;
+  max-width:480px;
+}
+.scroll-cue{
+  position:absolute;bottom:24px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+  opacity:0.3;animation:bob 2.5s ease-in-out infinite;
+}
+.scroll-cue span{font-family:var(--mono);font-size:9px;letter-spacing:3px;color:var(--text-muted);text-transform:uppercase;}
+.scroll-cue::after{content:\'\';width:1px;height:20px;background:linear-gradient(to bottom,var(--text-muted),transparent);}
+@keyframes bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
+
+.cta-btn{
+  display:inline-flex;align-items:center;gap:10px;padding:14px 32px;
+  background:linear-gradient(135deg,var(--purple),var(--accent));
+  color:#fff;text-decoration:none;border-radius:10px;
+  font-size:15px;font-weight:600;transition:all 0.25s;margin-top:8px;
+}
+.cta-btn:hover{transform:translateY(-2px);filter:brightness(1.15);}
+
+.progress{position:fixed;right:16px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:8px;z-index:100;}
+.progress-dot{width:6px;height:6px;border-radius:50%;background:var(--text-muted);opacity:0.25;transition:all 0.3s;cursor:pointer;border:none;padding:0;}
+.progress-dot.active{opacity:1;background:var(--accent);box-shadow:0 0 8px var(--accent);}
+
+@media(max-width:480px){
+  .pill-grid{grid-template-columns:1fr;gap:10px;}
+  .card-domains{padding:48px 20px;}
+  .card-title{padding:48px 20px;}
+  .progress{right:8px;gap:6px;}
+  .progress-dot{width:5px;height:5px;}
+}
 </style>
 </head>
 <body>
-<header class="topbar"><button class="topbar-menu" onclick="toggleSidebar()">&#9776;</button><div class="topbar-xx"><svg viewBox="484 0 176 138" xmlns="http://www.w3.org/2000/svg"><path fill="#7b5cd6" fill-rule="evenodd" d="M 616,69.25 L 604.8,85.9 L 583.2,118.7 L 572.3,135.3 L 561.4,118.7 L 539.7,85.9 L 506.9,135.6 L 484.8,135.6 L 526.3,72.7 L 528.6,69.25 L 539.5,52.6 L 561.1,19.8 L 572,3.16 L 583,19.8 L 604.6,52.6 L 637.4,2.9 L 659.5,2.9 L 615.8,69.25 Z M 593.9,69.25 L 572.3,36.45 L 550.7,69.25 L 572.3,102.04 Z"/><path fill="#7b5cd6" d="M 610.5,94.6 L 637.6,135.6 L 659.7,135.6 L 621.7,77.9 Z"/><path fill="#7b5cd6" d="M 506.9,2.9 L 484.8,2.9 L 522.8,60.3 L 534.3,44.2 Z"/></svg></div><span class="topbar-label">Knowledge Hub</span></header>
-<div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
-<aside class="sidebar" id="sidebar"><div class="sidebar-header"><div class="sidebar-header-left"><div class="sidebar-xx-mark"><svg viewBox="484 0 176 138" xmlns="http://www.w3.org/2000/svg"><path fill="#7b5cd6" fill-rule="evenodd" d="M 616,69.25 L 604.8,85.9 L 583.2,118.7 L 572.3,135.3 L 561.4,118.7 L 539.7,85.9 L 506.9,135.6 L 484.8,135.6 L 526.3,72.7 L 528.6,69.25 L 539.5,52.6 L 561.1,19.8 L 572,3.16 L 583,19.8 L 604.6,52.6 L 637.4,2.9 L 659.5,2.9 L 615.8,69.25 Z M 593.9,69.25 L 572.3,36.45 L 550.7,69.25 L 572.3,102.04 Z"/><path fill="#7b5cd6" d="M 610.5,94.6 L 637.6,135.6 L 659.7,135.6 L 621.7,77.9 Z"/><path fill="#7b5cd6" d="M 506.9,2.9 L 484.8,2.9 L 522.8,60.3 L 534.3,44.2 Z"/></svg></div><div class="sidebar-subtitle">Knowledge Hub</div></div><button class="sidebar-close" onclick="toggleSidebar()">&#10005;</button></div>
-<nav><a href="index.html" class="nav-item">Home</a><a href="vision.html" class="nav-item">The GENEXXO Vision</a><a href="collection.html" class="nav-item">The Collection</a><a href="domain-gallery.html" class="nav-item active">Domain Gallery</a><a href="supernova-demo.html" class="nav-item">Supernova Application</a><div class="nav-group-label">Vision Series</div><a href="genexxo-vision-series.html" class="nav-item nav-sub">Series Landing Page</a><div class="nav-group-label">More</div><a href="book.html" class="nav-item">The Book</a><a href="blog.html" class="nav-item">Blog</a><a href="press.html" class="nav-item">Press</a><a href="about.html" class="nav-item">About</a></nav></aside>
-<div class="main">
-<div class="breadcrumb-bar"><a href="index.html">Home</a><span>&#8250;</span><span>Domain Gallery</span></div>
-<div class="placeholder">
-<div class="badge">Coming Soon</div>
-<h1>Domain <em>Gallery</em></h1>
-<p>Browse the full GENEXXO collection across all 45 commercial categories. This interactive gallery is currently being built.</p>
-</div>
-<footer class="footer"><div class="footer-company">&copy; 2025 <strong>GENEXXO Vision Limited</strong> &middot; Company No. 022622V &middot; Isle of Man</div></footer>
-</div>
-<script>function toggleSidebar(){document.getElementById('sidebar').classList.toggle('open');document.getElementById('sidebarOverlay').classList.toggle('open')}</script>
+
+<nav class="progress" id="progress"></nav>
+
+<!-- ── TITLE CARD ── -->
+<section class="card card-title">
+  <div class="card-title-inner">
+    <div style="font-family:var(--mono);font-size:11px;letter-spacing:4px;color:var(--text-muted);text-transform:uppercase;">GENEXXO Collection</div>
+    <h1>The <span class="grad">Domain Gallery</span></h1>
+    <p>10,000+ XX-branded domains across 45 categories. Each one a gateway. Each one a micro-brand waiting to come alive.</p>
+  </div>
+  <div class="scroll-cue"><span>Scroll</span></div>
+</section>
+
+<!-- ── BEAUTY — HERO ── -->
+<section class="card card-hero">
+  <img src="gallery/beauty.jpg" alt="MakeupXX.com" loading="lazy">
+</section>
+
+<!-- ── BEAUTY — DOMAINS ── -->
+<section class="card card-domains">
+  <div class="card-domains-inner">
+    <div class="card-domains-header">
+      <div class="card-domains-cat">Beauty Category</div>
+      <div class="card-domains-title">The <em>Beauty</em> Collection</div>
+      <div class="card-domains-count">Sample domains from 200+ in this category</div>
+    </div>
+    <div class="pill-grid">
+      <div class="pill c1"><div class="pill-dot"></div><span class="pill-name">MakeupXX<span class="pill-suffix">.com</span></span></div>
+      <div class="pill c2"><div class="pill-dot"></div><span class="pill-name">SkinCareXX<span class="pill-suffix">.com</span></span></div>
+      <div class="pill c3"><div class="pill-dot"></div><span class="pill-name">FragranceXX<span class="pill-suffix">.com</span></span></div>
+      <div class="pill c4"><div class="pill-dot"></div><span class="pill-name">CosmeticsXX<span class="pill-suffix">.com</span></span></div>
+      <div class="pill c5"><div class="pill-dot"></div><span class="pill-name">HairXX<span class="pill-suffix">.com</span></span></div>
+      <div class="pill c6"><div class="pill-dot"></div><span class="pill-name">NailsXX<span class="pill-suffix">.com</span></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ADVENTURE — HERO ── -->
+<section class="card card-hero">
+  <img src="gallery/ski.jpg" alt="ClimbXX.com" loading="lazy">
+</section>
+
+<!-- ── ADVENTURE — DOMAINS ── -->
+<section class="card card-domains">
+  <div class="card-domains-inner">
+    <div class="card-domains-header">
+      <div class="card-domains-cat">Sports & Adventure Category</div>
+      <div class="card-domains-title">The <em>Adventure</em> Collection</div>
+      <div class="card-domains-count">Sample domains from 300+ in this category</div>
+    </div>
+    <div class="pill-grid">
+      <div class="pill c1"><div class="pill-dot"></div><span class="pill-name">ClimbXX<span class="pill-suffix">.com</span></span></div>
+      <div class="pill c2"><div class="pill-dot"></div><span class="pill-name">SurfXX<span class="pill-suffix">.com</span></span></div>
+      <div class="pill c3"><div class="pill-dot"></div><span class="pill-name">SnowboardXX<span class="pill-suffix">.com</span></span></div>
+      <div class="pill c4"><div class="pill-dot"></div><span class="pill-name">HikeXX<span class="pill-suffix">.com</span></span></div>
+      <div class="pill c5"><div class="pill-dot"></div><span class="pill-name">TrekXX<span class="pill-suffix">.com</span></span></div>
+      <div class="pill c6"><div class="pill-dot"></div><span class="pill-name">KayakXX<span class="pill-suffix">.com</span></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── AEROSPACE — HERO ── -->
+<section class="card card-hero">
+  <img src="gallery/drone.jpg" alt="AviationXX.com" loading="lazy">
+</section>
+
+<!-- ── AEROSPACE — DOMAINS ── -->
+<section class="card card-domains">
+  <div class="card-domains-inner">
+    <div class="card-domains-header">
+      <div class="card-domains-cat">Aerospace & Technology Category</div>
+      <div class="card-domains-title">The <em>Aerospace</em> Collection</div>
+      <div class="card-domains-count">Sample domains from 150+ in this category</div>
+    </div>
+    <div class="pill-grid">
+      <div class="pill c1"><div class="pill-dot"></div><span class="pill-name">AviationXX<span class="pill-suffix">.com</span></span></div>
+      <div class="pill c2"><div class="pill-dot"></div><span class="pill-name">RocketXX<span class="pill-suffix">.com</span></span></div>
+      <div class="pill c3"><div class="pill-dot"></div><span class="pill-name">SatelliteXX<span class="pill-suffix">.com</span></span></div>
+      <div class="pill c4"><div class="pill-dot"></div><span class="pill-name">PilotXX<span class="pill-suffix">.com</span></span></div>
+      <div class="pill c5"><div class="pill-dot"></div><span class="pill-name">SpaceXX<span class="pill-suffix">.com</span></span></div>
+      <div class="pill c6"><div class="pill-dot"></div><span class="pill-name">RadarXX<span class="pill-suffix">.com</span></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── WELLNESS — HERO ── -->
+<section class="card card-hero">
+  <img src="gallery/yoga.jpg" alt="MeditationXX.com" loading="lazy">
+</section>
+
+<!-- ── WELLNESS — DOMAINS ── -->
+<section class="card card-domains">
+  <div class="card-domains-inner">
+    <div class="card-domains-header">
+      <div class="card-domains-cat">Health & Wellness Category</div>
+      <div class="card-domains-title">The <em>Wellness</em> Collection</div>
+      <div class="card-domains-count">Sample domains from 250+ in this category</div>
+    </div>
+    <div class="pill-grid">
+      <div class="pill c1"><div class="pill-dot"></div><span class="pill-name">MeditationXX<span class="pill-suffix">.com</span></span></div>
+      <div class="pill c2"><div class="pill-dot"></div><span class="pill-name">WellnessXX<span class="pill-suffix">.com</span></span></div>
+      <div class="pill c3"><div class="pill-dot"></div><span class="pill-name">PilatesXX<span class="pill-suffix">.com</span></span></div>
+      <div class="pill c4"><div class="pill-dot"></div><span class="pill-name">FitnessXX<span class="pill-suffix">.com</span></span></div>
+      <div class="pill c5"><div class="pill-dot"></div><span class="pill-name">SpaXX<span class="pill-suffix">.com</span></span></div>
+      <div class="pill c6"><div class="pill-dot"></div><span class="pill-name">TherapyXX<span class="pill-suffix">.com</span></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CLOSE CARD ── -->
+<section class="card card-title">
+  <div class="card-title-inner">
+    <div style="font-family:var(--mono);font-size:10px;letter-spacing:4px;color:var(--text-muted);text-transform:uppercase;">45 Categories &middot; 400+ Sub-categories</div>
+    <h1>10,000+ <span class="grad">Gateways</span></h1>
+    <p>Every significant commercial category. Every meaningful term. The most comprehensive domain collection ever assembled &mdash; and it can never be replicated.</p>
+    <a href="index.html" class="cta-btn">Return to the Hub &rarr;</a>
+  </div>
+</section>
+
+<script>
+const cards = document.querySelectorAll('.card');
+const prog  = document.getElementById('progress');
+cards.forEach((_,i) => {
+  const dot = document.createElement('button');
+  dot.className = 'progress-dot';
+  dot.setAttribute('aria-label', 'Card '+(i+1));
+  dot.onclick = () => cards[i].scrollIntoView({behavior:'smooth'});
+  prog.appendChild(dot);
+});
+const dots = document.querySelectorAll('.progress-dot');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const idx = [...cards].indexOf(e.target);
+      dots.forEach((d,i) => d.classList.toggle('active', i===idx));
+    }
+  });
+}, {threshold:0.55});
+cards.forEach(c => obs.observe(c));
+
+const fadeObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.style.opacity = '1';
+      e.target.style.transform = 'translateY(0)';
+    }
+  });
+}, {threshold:0.3});
+document.querySelectorAll('.card-domains-inner, .card-title-inner').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(30px)';
+  el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+  fadeObs.observe(el);
+});
+</script>
 </body>
 </html>
