@@ -2,154 +2,681 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The GENEXXO Vision — Knowledge Hub</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>The GENEXXO Vision — The Organizing Layer</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@300;400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--bg-primary:#f9f8f6;--bg-secondary:#fcfbf9;--bg-card:#fcfbf9;--bg-card-hover:#f4f2ef;--bg-sidebar:#111118;--border:rgba(59,92,238,0.09);--border-mid:rgba(59,92,238,0.13);--border-hover:rgba(59,92,238,0.28);--border-dark:rgba(59,92,238,0.12);--text-primary:#1a1a2e;--text-secondary:#5a5b6e;--text-muted:#908e9a;--accent:#3b5cee;--accent-light:#5a78f5;--accent-glow:rgba(59,92,238,0.07);--purple:#7b5cd6;--purple-light:#9478e0;--purple-glow:rgba(123,92,214,0.08);--coral:#ff3e8e;--font-body:'DM Sans',-apple-system,sans-serif;--font-mono:'Space Mono',monospace}*{margin:0;padding:0;box-sizing:border-box}body{background:var(--bg-primary);color:var(--text-primary);font-family:var(--font-body);line-height:1.75;overflow-x:hidden}
-.topbar{position:fixed;top:0;left:0;right:0;height:56px;background:rgba(252,251,249,0.9);backdrop-filter:blur(16px);border-bottom:1px solid var(--border-mid);z-index:200;display:flex;align-items:center;padding:0 32px;gap:16px}.topbar-menu{width:36px;height:36px;background:0 0;border:1px solid var(--border-mid);border-radius:8px;color:var(--text-secondary);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;transition:all .2s;flex-shrink:0}.topbar-menu:hover{border-color:var(--border-hover);color:var(--text-primary);background:var(--accent-glow)}.topbar-xx{width:28px;height:22px;flex-shrink:0}.topbar-xx svg{width:100%;height:100%;display:block}.topbar-label{font-family:var(--font-mono);font-size:11px;letter-spacing:2px;color:var(--text-muted);text-transform:uppercase}
-.sidebar-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:299;opacity:0;pointer-events:none;transition:opacity .3s}.sidebar-overlay.open{opacity:1;pointer-events:all}.sidebar{position:fixed;top:0;left:0;width:300px;height:100vh;background:var(--bg-sidebar);border-right:1px solid var(--border-dark);z-index:300;display:flex;flex-direction:column;overflow-y:auto;transform:translateX(-100%);transition:transform .3s ease}.sidebar.open{transform:translateX(0)}.sidebar-header{padding:24px 24px 20px;border-bottom:1px solid var(--border-dark);display:flex;align-items:center;justify-content:space-between}.sidebar-header-left{display:flex;align-items:center;gap:14px}.sidebar-xx-mark{width:36px;height:28px;flex-shrink:0}.sidebar-xx-mark svg{width:100%;height:100%;display:block}.sidebar-subtitle{font-size:12px;color:#9394a5;letter-spacing:2px;text-transform:uppercase;font-family:var(--font-mono);font-weight:500}.sidebar-close{width:32px;height:32px;background:0 0;border:1px solid var(--border-dark);border-radius:8px;color:#5e5f72;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center}.sidebar-close:hover{color:#e8e8ed}.sidebar nav{padding:16px 0;flex:1}.nav-item{display:block;padding:10px 24px;color:#9394a5;text-decoration:none;font-size:14px;border-left:2px solid transparent;transition:all .2s}.nav-item:hover{color:#e8e8ed;background:rgba(59,92,238,.15);border-left-color:var(--accent)}.nav-item.active{color:var(--accent-light);font-weight:600;background:rgba(59,92,238,.15);border-left-color:var(--accent)}.nav-group-label{padding:20px 24px 6px;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#5e5f72;font-weight:600}.nav-sub{padding-left:40px;font-size:13px}
-.main{min-height:100vh;padding-top:56px}.breadcrumb-bar{padding:14px 56px;border-bottom:1px solid var(--border);font-size:13px;color:var(--text-muted);display:flex;align-items:center;gap:8px;background:var(--bg-secondary)}.breadcrumb-bar a{color:var(--accent);text-decoration:none;font-weight:500}
-.article-header{padding:56px 56px 40px;max-width:820px}.article-badge{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;background:var(--purple-glow);border:1px solid rgba(123,92,214,0.2);border-radius:100px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--purple);font-weight:600;margin-bottom:20px}.article-badge::before{content:'';width:5px;height:5px;background:var(--purple);border-radius:50%}.article-header h1{font-size:clamp(30px,4vw,42px);font-weight:700;line-height:1.2;letter-spacing:-.5px}.article-header h1 em{font-style:normal;background:linear-gradient(135deg,#ec1c24,#2a265e,#1b75bb);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}.article-strapline{margin-top:8px;font-size:17px;color:var(--purple);font-weight:500;font-style:italic}.article-meta{margin-top:16px;font-size:13px;color:var(--text-muted);display:flex;gap:20px;align-items:center;flex-wrap:wrap}.article-meta-dot{width:3px;height:3px;background:var(--text-muted);border-radius:50%;opacity:.5}
-.article-body{padding:0 56px 60px;max-width:820px}.article-body h2{font-size:22px;font-weight:700;margin:44px 0 14px;padding-top:20px;border-top:1px solid var(--border)}.article-body h2:first-child{margin-top:0;padding-top:0;border-top:none}.article-body h3{font-size:17px;font-weight:600;margin:28px 0 10px}.article-body p{font-size:15.5px;color:var(--text-secondary);line-height:1.85;margin-bottom:18px}.article-body strong{color:var(--text-primary);font-weight:600}.article-body ul,.article-body ol{margin:0 0 18px 24px;color:var(--text-secondary);font-size:15px;line-height:1.85}.article-body li{margin-bottom:8px}.article-body blockquote{margin:28px 0;padding:24px 28px;background:linear-gradient(135deg,rgba(59,92,238,.04),rgba(123,92,214,.03));border-left:3px solid var(--purple);border-radius:0 12px 12px 0;font-size:15px;color:var(--text-primary);line-height:1.7;font-style:italic}.article-body hr{border:none;height:1px;background:var(--border);margin:40px 0}
-.page-nav{margin:0 56px 48px;padding-top:32px;border-top:1px solid var(--border);display:flex;justify-content:space-between;gap:16px;max-width:720px}.page-nav a{display:flex;flex-direction:column;gap:4px;padding:16px 20px;background:var(--bg-secondary);border:1px solid var(--border-mid);border-radius:12px;text-decoration:none;transition:all .2s;min-width:180px}.page-nav a:hover{border-color:var(--border-hover);background:var(--bg-card-hover)}.page-nav-label{font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-muted)}.page-nav-title{font-size:14px;font-weight:600;color:var(--accent)}.page-nav-next{text-align:right;margin-left:auto}
-.footer{padding:28px 56px;border-top:1px solid var(--border)}.footer-company{font-size:12px;color:var(--text-muted);text-align:center}.footer-company strong{color:var(--text-secondary);font-weight:500}
-@media(max-width:768px){.topbar{padding:0 16px}.article-header,.article-body{padding-left:24px;padding-right:24px}.breadcrumb-bar{padding:12px 24px}.page-nav{margin:0 24px 40px;flex-direction:column}.footer{padding:24px}}
+:root {
+  --bg: #08080d;
+  --card-1: #0a0b12;  --card-2: #0b0c14;  --card-3: #0c0d15;
+  --card-4: #0d0e16;  --card-5: #0e0f17;  --card-6: #0d0e16;
+  --card-7: #0c0d15;  --card-8: #0b0c14;  --card-9: #0a0b12;
+  --text: #e4e4ec;
+  --text-dim: #8a8b9e;
+  --text-muted: #55566a;
+  --accent: #5a78f5;
+  --accent-dim: rgba(90,120,245,0.15);
+  --red: #ec1c24;
+  --blue: #1b75bb;
+  --purple: #7b5cd6;
+  --coral: #ff3e8e;
+  --serif: 'Instrument Serif', Georgia, serif;
+  --mono: 'IBM Plex Mono', monospace;
+  --sans: 'DM Sans', sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-snap-type:y mandatory;scroll-behavior:smooth;overflow-x:hidden;}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);}
+
+.card{
+  min-height:100dvh;
+  scroll-snap-align:start;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  padding:60px 32px;
+  position:relative;
+  overflow:hidden;
+}
+.card-inner{
+  max-width:640px;
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  gap:28px;
+}
+.card-num{
+  font-family:var(--mono);
+  font-size:11px;
+  font-weight:300;
+  letter-spacing:4px;
+  color:var(--text-muted);
+  text-transform:uppercase;
+}
+.card-illust{
+  width:100%;
+  max-width:420px;
+  height:auto;
+  aspect-ratio:16/10;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.card-illust svg{width:100%;height:100%;}
+.card h2{
+  font-family:var(--serif);
+  font-size:clamp(28px,5vw,44px);
+  font-weight:400;
+  line-height:1.2;
+  letter-spacing:-0.3px;
+  max-width:560px;
+}
+.card h2 em{
+  font-style:italic;
+  color:var(--accent);
+}
+.card h2 .red{color:var(--red);}
+.card h2 .grad{
+  background:linear-gradient(135deg,var(--red),var(--purple),var(--blue));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.card p{
+  font-size:clamp(15px,2.2vw,17px);
+  line-height:1.8;
+  color:var(--text-dim);
+  max-width:520px;
+  font-weight:300;
+}
+.card p strong{color:var(--text);font-weight:500;}
+
+.scroll-cue{
+  position:absolute;
+  bottom:24px;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:6px;
+  opacity:0.3;
+  animation:bob 2.5s ease-in-out infinite;
+}
+.scroll-cue span{
+  font-family:var(--mono);
+  font-size:9px;
+  letter-spacing:3px;
+  color:var(--text-muted);
+  text-transform:uppercase;
+}
+.scroll-cue::after{
+  content:'';
+  width:1px;height:20px;
+  background:linear-gradient(to bottom,var(--text-muted),transparent);
+}
+@keyframes bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
+
+/* domain pills */
+.domain-pills{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  justify-content:center;
+  margin-top:-8px;
+}
+.domain-pill{
+  font-family:var(--mono);
+  font-size:12px;
+  font-weight:400;
+  letter-spacing:0.5px;
+  padding:6px 14px;
+  border-radius:100px;
+  border:1px solid rgba(90,120,245,0.2);
+  background:rgba(90,120,245,0.05);
+  color:var(--accent);
+}
+
+/* CTA */
+.cta-btn{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:14px 32px;
+  background:linear-gradient(135deg,var(--purple),var(--accent));
+  color:#fff;text-decoration:none;border-radius:10px;
+  font-size:15px;font-weight:600;
+  transition:all 0.25s;
+  margin-top:8px;
+}
+.cta-btn:hover{transform:translateY(-2px);filter:brightness(1.15);}
+
+/* progress dots */
+.progress{
+  position:fixed;
+  right:16px;
+  top:50%;
+  transform:translateY(-50%);
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  z-index:100;
+}
+.progress-dot{
+  width:6px;height:6px;
+  border-radius:50%;
+  background:var(--text-muted);
+  opacity:0.25;
+  transition:all 0.3s;
+  cursor:pointer;
+  border:none;
+  padding:0;
+}
+.progress-dot.active{
+  opacity:1;
+  background:var(--accent);
+  box-shadow:0 0 8px var(--accent);
+}
+
+@media(max-width:480px){
+  .card{padding:48px 20px;}
+  .card-illust{max-width:300px;}
+  .progress{right:8px;gap:8px;}
+  .progress-dot{width:5px;height:5px;}
+  .domain-pills{gap:6px;}
+  .domain-pill{font-size:10px;padding:5px 10px;}
+}
 </style>
 </head>
 <body>
-<header class="topbar"><button class="topbar-menu" onclick="toggleSidebar()">&#9776;</button><div class="topbar-xx"><svg viewBox="484 0 176 138" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="xxg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#ec1c24"/><stop offset="70%" stop-color="#2a265e"/><stop offset="100%" stop-color="#1b75bb"/></linearGradient></defs><path fill="url(#xxg)" fill-rule="evenodd" d="M 616,69.25 L 604.8,85.9 L 583.2,118.7 L 572.3,135.3 L 561.4,118.7 L 539.7,85.9 L 506.9,135.6 L 484.8,135.6 L 526.3,72.7 L 528.6,69.25 L 539.5,52.6 L 561.1,19.8 L 572,3.16 L 583,19.8 L 604.6,52.6 L 637.4,2.9 L 659.5,2.9 L 615.8,69.25 Z M 593.9,69.25 L 572.3,36.45 L 550.7,69.25 L 572.3,102.04 Z"/><path fill="url(#xxg)" d="M 610.5,94.6 L 637.6,135.6 L 659.7,135.6 L 621.7,77.9 Z"/><path fill="url(#xxg)" d="M 506.9,2.9 L 484.8,2.9 L 522.8,60.3 L 534.3,44.2 Z"/></svg></div><span class="topbar-label">Knowledge Hub</span></header>
-<div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
-<aside class="sidebar" id="sidebar"><div class="sidebar-header"><div class="sidebar-header-left"><div class="sidebar-xx-mark"><svg viewBox="484 0 176 138" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="xxg2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#ec1c24"/><stop offset="70%" stop-color="#2a265e"/><stop offset="100%" stop-color="#1b75bb"/></linearGradient></defs><path fill="url(#xxg2)" fill-rule="evenodd" d="M 616,69.25 L 604.8,85.9 L 583.2,118.7 L 572.3,135.3 L 561.4,118.7 L 539.7,85.9 L 506.9,135.6 L 484.8,135.6 L 526.3,72.7 L 528.6,69.25 L 539.5,52.6 L 561.1,19.8 L 572,3.16 L 583,19.8 L 604.6,52.6 L 637.4,2.9 L 659.5,2.9 L 615.8,69.25 Z M 593.9,69.25 L 572.3,36.45 L 550.7,69.25 L 572.3,102.04 Z"/><path fill="url(#xxg2)" d="M 610.5,94.6 L 637.6,135.6 L 659.7,135.6 L 621.7,77.9 Z"/><path fill="url(#xxg2)" d="M 506.9,2.9 L 484.8,2.9 L 522.8,60.3 L 534.3,44.2 Z"/></svg></div><div class="sidebar-subtitle">Knowledge Hub</div></div><button class="sidebar-close" onclick="toggleSidebar()">&#10005;</button></div>
-<nav><a href="index.html" class="nav-item">Home</a><a href="vision.html" class="nav-item active">The GENEXXO Vision</a><a href="collection.html" class="nav-item">The Collection</a><a href="domain-gallery.html" class="nav-item">Domain Gallery</a><a href="supernova-demo.html" class="nav-item">Supernova Application</a><div class="nav-group-label">Vision Series</div><a href="genexxo-vision-series.html" class="nav-item nav-sub">Series Landing Page</a><div class="nav-group-label">More</div><a href="book.html" class="nav-item">The Book</a><a href="blog.html" class="nav-item">Blog</a><a href="press.html" class="nav-item">Press</a><a href="about.html" class="nav-item">About</a></nav></aside>
 
-<div class="main">
-<div class="breadcrumb-bar"><a href="index.html">Home</a><span>&#8250;</span><span>The GENEXXO Vision</span></div>
+<nav class="progress" id="progress"></nav>
 
-<header class="article-header">
-  <div class="article-badge">Executive White Paper</div>
-  <h1>The <em>GENEXXO</em> Vision</h1>
-  <p class="article-strapline">The Internet's Organising Layer &mdash; Acquisition &amp; Strategic Partnership Opportunity</p>
-  <div class="article-meta">
-    <span>GENEXXO Vision Ltd</span>
-    <span class="article-meta-dot"></span>
-    <span>April 2026</span>
-    <span class="article-meta-dot"></span>
-    <span>10 min read</span>
+<!-- ══════════════════════════════════════════════════════════════════════════
+     CARD 1 — THE VISION
+     ══════════════════════════════════════════════════════════════════════════ -->
+<section class="card" style="background:var(--card-1)">
+  <div class="card-inner">
+    <div class="card-num">GENEXXO Vision</div>
+    <div class="card-illust">
+      <svg viewBox="0 0 420 260" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#ec1c24" stop-opacity="0.8"/>
+            <stop offset="50%" stop-color="#7b5cd6" stop-opacity="0.6"/>
+            <stop offset="100%" stop-color="#1b75bb" stop-opacity="0.8"/>
+          </linearGradient>
+          <radialGradient id="glow1" cx="50%" cy="50%">
+            <stop offset="0%" stop-color="#5a78f5" stop-opacity="0.12"/>
+            <stop offset="100%" stop-color="#5a78f5" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <circle cx="210" cy="130" r="100" fill="url(#glow1)"/>
+        <!-- Layered rings suggesting structure -->
+        <circle cx="210" cy="130" r="80" fill="none" stroke="url(#g1)" stroke-width="0.6" opacity="0.2"/>
+        <circle cx="210" cy="130" r="55" fill="none" stroke="url(#g1)" stroke-width="0.8" opacity="0.25"/>
+        <circle cx="210" cy="130" r="30" fill="none" stroke="url(#g1)" stroke-width="1" opacity="0.3"/>
+        <!-- Central glow -->
+        <circle cx="210" cy="130" r="8" fill="url(#g1)" opacity="0.7">
+          <animate attributeName="r" values="8;12;8" dur="4s" repeatCount="indefinite"/>
+        </circle>
+        <!-- Orbital nodes -->
+        <circle cx="180" cy="78" r="3" fill="#ec1c24" opacity="0.6"/><circle cx="260" cy="95" r="3" fill="#1b75bb" opacity="0.6"/>
+        <circle cx="150" cy="140" r="3" fill="#7b5cd6" opacity="0.6"/><circle cx="270" cy="155" r="3" fill="#5a78f5" opacity="0.6"/>
+        <circle cx="190" cy="190" r="3" fill="#ff3e8e" opacity="0.6"/><circle cx="245" cy="180" r="3" fill="#ec1c24" opacity="0.6"/>
+        <!-- Faint connecting lines -->
+        <g stroke="url(#g1)" stroke-width="0.4" opacity="0.15">
+          <line x1="210" y1="130" x2="180" y2="78"/><line x1="210" y1="130" x2="260" y2="95"/>
+          <line x1="210" y1="130" x2="150" y2="140"/><line x1="210" y1="130" x2="270" y2="155"/>
+          <line x1="210" y1="130" x2="190" y2="190"/><line x1="210" y1="130" x2="245" y2="180"/>
+        </g>
+        <text x="210" y="137" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="9" fill="#5a78f5" opacity="0.6" letter-spacing="5">XX</text>
+      </svg>
+    </div>
+    <h2>The <span class="grad">Organizing Layer</span> for the Internet</h2>
+    <p>A vision fourteen years in the making. One ecosystem that will bring structure to the digital world — where everything finds its natural home.</p>
   </div>
-</header>
+  <div class="scroll-cue"><span>Scroll</span></div>
+</section>
 
-<article class="article-body">
+<!-- ══════════════════════════════════════════════════════════════════════════
+     CARD 2 — THE ASSET
+     ══════════════════════════════════════════════════════════════════════════ -->
+<section class="card" style="background:var(--card-2)">
+  <div class="card-inner">
+    <div class="card-num">01 · The Asset</div>
+    <div class="card-illust">
+      <svg viewBox="0 0 420 260" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="g2" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#ec1c24"/><stop offset="50%" stop-color="#7b5cd6"/><stop offset="100%" stop-color="#1b75bb"/>
+          </linearGradient>
+        </defs>
+        <!-- Grid of XX domain blocks — suggesting vast collection -->
+        <g font-family="'IBM Plex Mono',monospace" font-size="8" opacity="0.2" fill="#8a8b9e">
+          <text x="45" y="45">TechXX</text><text x="115" y="45">FoodXX</text><text x="185" y="45">ArtXX</text><text x="255" y="45">PetXX</text><text x="325" y="45">FilmXX</text>
+          <text x="45" y="75">SurfXX</text><text x="115" y="75">YogaXX</text><text x="185" y="75">AutoXX</text><text x="255" y="75">LegalXX</text><text x="325" y="75">MusicXX</text>
+          <text x="45" y="105">CryptoXX</text><text x="115" y="105">SportsXX</text><text x="185" y="105">ClimbXX</text><text x="255" y="105">DesignXX</text><text x="325" y="105">GamingXX</text>
+          <text x="45" y="195">DroneXX</text><text x="115" y="195">WineXX</text><text x="185" y="195">GolfXX</text><text x="255" y="195">DanceXX</text><text x="325" y="195">RunXX</text>
+          <text x="45" y="225">PokerXX</text><text x="115" y="225">SailXX</text><text x="185" y="225">SkiXX</text><text x="255" y="225">BikeXX</text><text x="325" y="225">CookXX</text>
+        </g>
+        <!-- Three hero domains highlighted -->
+        <g font-family="'IBM Plex Mono',monospace" font-size="13" fill="#e4e4ec" opacity="0.85">
+          <text x="80" y="145" text-anchor="middle">FinanceXX</text>
+          <text x="210" y="150" text-anchor="middle">BeautyXX</text>
+          <text x="340" y="145" text-anchor="middle">HealthXX</text>
+        </g>
+        <g opacity="0.4">
+          <circle cx="80" cy="150" r="2" fill="#ec1c24"/><circle cx="210" cy="155" r="2" fill="#7b5cd6"/><circle cx="340" cy="150" r="2" fill="#1b75bb"/>
+        </g>
+        <!-- Counter -->
+        <text x="210" y="255" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="10" fill="#5a78f5" opacity="0.4" letter-spacing="3">10,000+</text>
+      </svg>
+    </div>
+    <h2>The asset that makes it <em>possible</em></h2>
+    <p>The GENEXXO Collection. <strong>Over 10,000 XX-branded single-word .com domains</strong> spanning every significant commercial category. The foundation no one else can build.</p>
+    <div class="domain-pills">
+      <span class="domain-pill">TechXX.com</span>
+      <span class="domain-pill">BeautyXX.com</span>
+      <span class="domain-pill">HealthXX.com</span>
+      <span class="domain-pill">FinanceXX.com</span>
+      <span class="domain-pill">SurfXX.com</span>
+    </div>
+  </div>
+</section>
 
-<h2>Executive Summary</h2>
-<p>GENEXXO represents a rare opportunity to acquire or partner on the internet's missing organising layer &mdash; a complete, clean-slate vision that has matured into a detailed blueprint ready for deployment.</p>
-<p>At its core sits an unreplicable strategic asset: the GENEXXO Collection &mdash; more than 10,000 premium single-word .com domains, unified by a proprietary XX signature and structured across 45 categories of human activity. Assembled over 14 years, this linguistic infrastructure forms a permanent foundation that no competitor can replicate at any cost or in any timeframe.</p>
-<p>The complete architecture delivers a single Supernova Progressive Web App with one unified account and profile across the entire ecosystem; thousands of independent, self-evolving gateways each acting as a beacon with its own on-ramp to the Supernova experience; an integrated GENEXXO App Store for contextual deployment of specialist agents and tools; dedicated Brand Zones enabling powerful Direct-to-Consumer (D2C) extension into authentic communities; a pure Facilitator Model with superior margins and perfectly aligned incentives; and a multi-dimensional network supported by four native pillars &mdash; Content, Community, Commerce, and Agentic AI Intelligence.</p>
-<p>In a world of accelerating fragmentation &mdash; a constant tsunami of new apps, tools, content, and AI agents &mdash; GENEXXO does not seek to unify or replace existing platforms. It provides a compelling alternative: a coherent gravitational network of beacons where people, creators, communities, brands, and agents can naturally gravitate and thrive in context.</p>
-<blockquote>This white paper presents the GENEXXO Vision as a fully articulated blueprint, ready for immediate deployment.</blockquote>
+<!-- ══════════════════════════════════════════════════════════════════════════
+     CARD 3 — THE DEPLOYMENT
+     ══════════════════════════════════════════════════════════════════════════ -->
+<section class="card" style="background:var(--card-3)">
+  <div class="card-inner">
+    <div class="card-num">02 · The Deployment</div>
+    <div class="card-illust">
+      <svg viewBox="0 0 420 260" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="nova3" cx="50%" cy="50%">
+            <stop offset="0%" stop-color="#7b5cd6" stop-opacity="0.2"/>
+            <stop offset="50%" stop-color="#5a78f5" stop-opacity="0.06"/>
+            <stop offset="100%" stop-color="#5a78f5" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <circle cx="210" cy="130" r="110" fill="url(#nova3)"/>
+        <!-- Central burst — supernova -->
+        <circle cx="210" cy="130" r="10" fill="#7b5cd6" opacity="0.6">
+          <animate attributeName="r" values="10;14;10" dur="3s" repeatCount="indefinite"/>
+        </circle>
+        <!-- Rays outward — deployment paths -->
+        <g stroke="#5a78f5" stroke-width="0.6" opacity="0.3">
+          <line x1="210" y1="130" x2="80" y2="40"/><line x1="210" y1="130" x2="340" y2="35"/>
+          <line x1="210" y1="130" x2="50" y2="140"/><line x1="210" y1="130" x2="370" y2="135"/>
+          <line x1="210" y1="130" x2="90" y2="230"/><line x1="210" y1="130" x2="330" y2="225"/>
+          <line x1="210" y1="130" x2="150" y2="30"/><line x1="210" y1="130" x2="270" y2="30"/>
+          <line x1="210" y1="130" x2="150" y2="240"/><line x1="210" y1="130" x2="270" y2="240"/>
+          <line x1="210" y1="130" x2="40" y2="80"/><line x1="210" y1="130" x2="380" y2="190"/>
+        </g>
+        <!-- Gateway nodes at ends of rays -->
+        <g opacity="0.5">
+          <circle cx="80" cy="40" r="3" fill="#ec1c24"/><circle cx="340" cy="35" r="3" fill="#1b75bb"/>
+          <circle cx="50" cy="140" r="3" fill="#7b5cd6"/><circle cx="370" cy="135" r="3" fill="#ff3e8e"/>
+          <circle cx="90" cy="230" r="3" fill="#5a78f5"/><circle cx="330" cy="225" r="3" fill="#ec1c24"/>
+          <circle cx="150" cy="30" r="2.5" fill="#1b75bb"/><circle cx="270" cy="30" r="2.5" fill="#7b5cd6"/>
+          <circle cx="150" cy="240" r="2.5" fill="#ff3e8e"/><circle cx="270" cy="240" r="2.5" fill="#5a78f5"/>
+          <circle cx="40" cy="80" r="2.5" fill="#ec1c24"/><circle cx="380" cy="190" r="2.5" fill="#1b75bb"/>
+        </g>
+        <text x="210" y="135" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="7" fill="#fff" opacity="0.7" letter-spacing="3">SUPERNOVA</text>
+      </svg>
+    </div>
+    <h2>Deployed by a <em>Supernova Application</em></h2>
+    <p>These domains will be deployed across the internet — <strong>gravitational gateways reaching into every category, every niche.</strong> One application that launches an entire ecosystem.</p>
+  </div>
+</section>
 
-<hr>
+<!-- ══════════════════════════════════════════════════════════════════════════
+     CARD 4 — THE NETWORK
+     ══════════════════════════════════════════════════════════════════════════ -->
+<section class="card" style="background:var(--card-4)">
+  <div class="card-inner">
+    <div class="card-num">03 · The Network</div>
+    <div class="card-illust">
+      <svg viewBox="0 0 420 260" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="g4" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#ec1c24"/><stop offset="50%" stop-color="#7b5cd6"/><stop offset="100%" stop-color="#1b75bb"/>
+          </linearGradient>
+        </defs>
+        <!-- Dense cobweb — vertical and horizontal connections -->
+        <g stroke="url(#g4)" stroke-width="0.4" opacity="0.2">
+          <!-- Hub spokes -->
+          <line x1="210" y1="130" x2="100" y2="50"/><line x1="210" y1="130" x2="320" y2="45"/>
+          <line x1="210" y1="130" x2="70" y2="130"/><line x1="210" y1="130" x2="350" y2="130"/>
+          <line x1="210" y1="130" x2="100" y2="210"/><line x1="210" y1="130" x2="320" y2="215"/>
+          <!-- Cross connections (horizontal breadth) -->
+          <line x1="100" y1="50" x2="320" y2="45"/><line x1="70" y1="130" x2="100" y2="50"/>
+          <line x1="350" y1="130" x2="320" y2="45"/><line x1="100" y1="210" x2="320" y2="215"/>
+          <line x1="70" y1="130" x2="100" y2="210"/><line x1="350" y1="130" x2="320" y2="215"/>
+          <!-- Deeper vertical lines -->
+          <line x1="100" y1="50" x2="60" y2="20"/><line x1="100" y1="50" x2="130" y2="15"/>
+          <line x1="320" y1="45" x2="290" y2="15"/><line x1="320" y1="45" x2="360" y2="20"/>
+          <line x1="100" y1="210" x2="70" y2="245"/><line x1="320" y1="215" x2="350" y2="245"/>
+        </g>
+        <!-- Nodes -->
+        <g opacity="0.55">
+          <circle cx="100" cy="50" r="4" fill="#ec1c24"/><circle cx="320" cy="45" r="4" fill="#1b75bb"/>
+          <circle cx="70" cy="130" r="4" fill="#7b5cd6"/><circle cx="350" cy="130" r="4" fill="#ff3e8e"/>
+          <circle cx="100" cy="210" r="4" fill="#5a78f5"/><circle cx="320" cy="215" r="4" fill="#ec1c24"/>
+        </g>
+        <!-- Depth nodes -->
+        <g opacity="0.25">
+          <circle cx="60" cy="20" r="2" fill="#ec1c24"/><circle cx="130" cy="15" r="2" fill="#1b75bb"/>
+          <circle cx="290" cy="15" r="2" fill="#7b5cd6"/><circle cx="360" cy="20" r="2" fill="#5a78f5"/>
+          <circle cx="70" cy="245" r="2" fill="#ff3e8e"/><circle cx="350" cy="245" r="2" fill="#1b75bb"/>
+        </g>
+        <!-- Hub -->
+        <circle cx="210" cy="130" r="7" fill="url(#g4)" opacity="0.7"/>
+        <!-- Labels -->
+        <text x="140" y="135" text-anchor="end" font-family="'IBM Plex Mono',monospace" font-size="8" fill="#8a8b9e" opacity="0.35">HORIZONTAL</text>
+        <text x="215" y="80" font-family="'IBM Plex Mono',monospace" font-size="8" fill="#8a8b9e" opacity="0.35" transform="rotate(-90 215 80)">VERTICAL</text>
+      </svg>
+    </div>
+    <h2>A <em>multi-dimensional</em> network</h2>
+    <p>Each domain will interconnect to create a network with <strong>vertical depth and horizontal breadth.</strong> Not a flat directory — a living, breathing ecosystem where every node strengthens every other.</p>
+  </div>
+</section>
 
-<h2>1. The Opportunity</h2>
-<h3>Bringing Coherence to Growing Fragmentation</h3>
-<p>The internet continues to expand rapidly, yet it grows more fragmented with every cycle. Each new wave of apps, tools, platforms, and AI agents creates additional isolation and noise. Depth remains trapped in silos. Meaningful connections between related activities are rare. Users manage dozens of accounts; brands scatter their presence across platforms they do not control.</p>
-<p>GENEXXO does not aim to solve the challenges of existing platforms &mdash; many will continue to operate and evolve in their own ways. Instead, it provides something the internet has never had: <strong>a gravitational network of beacons where every human activity, interest, community, brand, and agentic tool has a permanent, context-rich destination.</strong></p>
-<p>Users benefit from one unified account and profile that works everywhere within the ecosystem. Brands and creators choose where they engage most effectively. Everything finds its natural home.</p>
+<!-- ══════════════════════════════════════════════════════════════════════════
+     CARD 5 — THE GRAVITATION
+     ══════════════════════════════════════════════════════════════════════════ -->
+<section class="card" style="background:var(--card-5)">
+  <div class="card-inner">
+    <div class="card-num">04 · The Gravitation</div>
+    <div class="card-illust">
+      <svg viewBox="0 0 420 260" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="grav5" cx="50%" cy="50%">
+            <stop offset="0%" stop-color="#5a78f5" stop-opacity="0.18"/>
+            <stop offset="100%" stop-color="#5a78f5" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <circle cx="210" cy="130" r="100" fill="url(#grav5)"/>
+        <!-- Four streams converging inward -->
+        <!-- Content -->
+        <g opacity="0.35">
+          <circle cx="80" cy="45" r="2.5" fill="#ec1c24"/><circle cx="95" cy="60" r="2" fill="#ec1c24"/>
+          <circle cx="112" cy="75" r="1.5" fill="#ec1c24"/>
+          <line x1="80" y1="45" x2="210" y2="130" stroke="#ec1c24" stroke-width="0.5" opacity="0.3"/>
+        </g>
+        <!-- Community -->
+        <g opacity="0.35">
+          <circle cx="340" cy="50" r="2.5" fill="#7b5cd6"/><circle cx="325" cy="65" r="2" fill="#7b5cd6"/>
+          <circle cx="308" cy="80" r="1.5" fill="#7b5cd6"/>
+          <line x1="340" y1="50" x2="210" y2="130" stroke="#7b5cd6" stroke-width="0.5" opacity="0.3"/>
+        </g>
+        <!-- Commerce -->
+        <g opacity="0.35">
+          <circle cx="340" cy="215" r="2.5" fill="#1b75bb"/><circle cx="322" cy="200" r="2" fill="#1b75bb"/>
+          <circle cx="305" cy="185" r="1.5" fill="#1b75bb"/>
+          <line x1="340" y1="215" x2="210" y2="130" stroke="#1b75bb" stroke-width="0.5" opacity="0.3"/>
+        </g>
+        <!-- AI -->
+        <g opacity="0.35">
+          <circle cx="80" cy="215" r="2.5" fill="#5a78f5"/><circle cx="98" cy="200" r="2" fill="#5a78f5"/>
+          <circle cx="115" cy="185" r="1.5" fill="#5a78f5"/>
+          <line x1="80" y1="215" x2="210" y2="130" stroke="#5a78f5" stroke-width="0.5" opacity="0.3"/>
+        </g>
+        <!-- Labels -->
+        <g font-family="'IBM Plex Mono',monospace" font-size="9" opacity="0.45">
+          <text x="55" y="40" fill="#ec1c24">Content</text>
+          <text x="345" y="45" fill="#7b5cd6">Community</text>
+          <text x="345" y="225" fill="#1b75bb">Commerce</text>
+          <text x="75" y="230" fill="#5a78f5" text-anchor="end">AI</text>
+        </g>
+        <!-- Centre -->
+        <circle cx="210" cy="130" r="8" fill="#5a78f5" opacity="0.6">
+          <animate attributeName="r" values="8;11;8" dur="3.5s" repeatCount="indefinite"/>
+        </circle>
+      </svg>
+    </div>
+    <h2>Everything gravitates toward its <em>natural home</em></h2>
+    <p>Content, community, commerce and AI — each drawn to the gateway where it belongs. <strong>Not forced. Not algorithmed. Naturally attracted</strong> to specialised destinations built to receive them.</p>
+  </div>
+</section>
 
-<hr>
+<!-- ══════════════════════════════════════════════════════════════════════════
+     CARD 6 — THE EXPERIENCE
+     ══════════════════════════════════════════════════════════════════════════ -->
+<section class="card" style="background:var(--card-6)">
+  <div class="card-inner">
+    <div class="card-num">05 · The Experience</div>
+    <div class="card-illust">
+      <svg viewBox="0 0 420 260" xmlns="http://www.w3.org/2000/svg">
+        <!-- User profile → seamless journey across gateways -->
+        <defs>
+          <linearGradient id="g6" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#ec1c24"/><stop offset="100%" stop-color="#1b75bb"/>
+          </linearGradient>
+        </defs>
+        <!-- Journey path -->
+        <path d="M 60,130 Q 130,60 210,100 Q 290,140 360,80" fill="none" stroke="url(#g6)" stroke-width="1.2" opacity="0.25" stroke-dasharray="4 4"/>
+        <!-- Gateway stops along the path -->
+        <g opacity="0.55">
+          <circle cx="60" cy="130" r="5" fill="#ec1c24"/>
+          <circle cx="140" cy="82" r="5" fill="#7b5cd6"/>
+          <circle cx="210" cy="100" r="5" fill="#5a78f5"/>
+          <circle cx="285" cy="120" r="5" fill="#ff3e8e"/>
+          <circle cx="360" cy="80" r="5" fill="#1b75bb"/>
+        </g>
+        <!-- Gateway labels -->
+        <g font-family="'IBM Plex Mono',monospace" font-size="8" fill="#8a8b9e" opacity="0.4" text-anchor="middle">
+          <text x="60" y="150">SurfXX</text><text x="140" y="100">ClimbXX</text>
+          <text x="210" y="120">TravelXX</text><text x="285" y="140">FoodXX</text>
+          <text x="360" y="100">MusicXX</text>
+        </g>
+        <!-- User avatar circle -->
+        <circle cx="210" cy="200" r="16" fill="none" stroke="url(#g6)" stroke-width="1" opacity="0.35"/>
+        <circle cx="210" cy="200" r="5" fill="url(#g6)" opacity="0.5"/>
+        <text x="210" y="235" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="8" fill="#5a78f5" opacity="0.45" letter-spacing="2">ONE PROFILE</text>
+        <!-- Connection from user to path -->
+        <line x1="210" y1="184" x2="210" y2="105" stroke="#5a78f5" stroke-width="0.5" opacity="0.15" stroke-dasharray="2 3"/>
+      </svg>
+    </div>
+    <h2>One profile. One journey. <em>No gatekeepers.</em></h2>
+    <p>A single user profile and a personal AI host will unify the journey across the entire ecosystem. Built on progressive web technology — <strong>no app store controls, no charges, no barriers.</strong> The open web, as it should be.</p>
+  </div>
+</section>
 
-<h2>2. The Irreplaceable Foundation</h2>
-<h3>The GENEXXO Collection</h3>
-<p>The entire GENEXXO vision rests on a proprietary asset assembled over 14 years:</p>
-<ul>
-  <li>More than <strong>10,000 premium single-word .com domains</strong> branded with the exclusive XX signature (e.g., SNEAKERXX.com, CLIMBXX.com, DIABETESXX.com, STEELXX.com).</li>
-  <li>Structured across <strong>45 finite and expansive categories</strong> with greater than 90% coverage in 43 categories and 400+ sub-categories.</li>
-  <li>Governed by <strong>14 rigorous design rules</strong> ensuring linguistic purity, trademark safety, universal memorability, and future-proof taxonomy.</li>
-</ul>
-<p>This Collection constitutes linguistic infrastructure and a permanent competitive moat. It transforms domains into powerful beacons &mdash; each a natural home that no competitor can replicate at any cost or in any timeframe. <strong>The Collection is now complete and locked.</strong></p>
+<!-- ══════════════════════════════════════════════════════════════════════════
+     CARD 7 — THE INTELLIGENCE
+     ══════════════════════════════════════════════════════════════════════════ -->
+<section class="card" style="background:var(--card-7)">
+  <div class="card-inner">
+    <div class="card-num">06 · The Intelligence</div>
+    <div class="card-illust">
+      <svg viewBox="0 0 420 260" xmlns="http://www.w3.org/2000/svg">
+        <!-- Multiple AI nodes, each specialized -->
+        <defs>
+          <radialGradient id="ai7" cx="50%" cy="50%">
+            <stop offset="0%" stop-color="#7b5cd6" stop-opacity="0.15"/>
+            <stop offset="100%" stop-color="#7b5cd6" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <!-- Specialised AI nodes -->
+        <g opacity="0.5">
+          <circle cx="100" cy="70" r="22" fill="url(#ai7)"/><circle cx="100" cy="70" r="5" fill="#ec1c24" opacity="0.6"/>
+          <circle cx="210" cy="55" r="22" fill="url(#ai7)"/><circle cx="210" cy="55" r="5" fill="#7b5cd6" opacity="0.6"/>
+          <circle cx="320" cy="70" r="22" fill="url(#ai7)"/><circle cx="320" cy="70" r="5" fill="#1b75bb" opacity="0.6"/>
+          <circle cx="140" cy="160" r="22" fill="url(#ai7)"/><circle cx="140" cy="160" r="5" fill="#5a78f5" opacity="0.6"/>
+          <circle cx="280" cy="160" r="22" fill="url(#ai7)"/><circle cx="280" cy="160" r="5" fill="#ff3e8e" opacity="0.6"/>
+        </g>
+        <!-- AI pulse rings -->
+        <g fill="none" stroke-width="0.5" opacity="0.2">
+          <circle cx="100" cy="70" r="15" stroke="#ec1c24"><animate attributeName="r" values="15;22;15" dur="3s" repeatCount="indefinite"/></circle>
+          <circle cx="210" cy="55" r="15" stroke="#7b5cd6"><animate attributeName="r" values="15;22;15" dur="3.5s" repeatCount="indefinite"/></circle>
+          <circle cx="320" cy="70" r="15" stroke="#1b75bb"><animate attributeName="r" values="15;22;15" dur="4s" repeatCount="indefinite"/></circle>
+        </g>
+        <!-- Connections between AI nodes -->
+        <g stroke="#7b5cd6" stroke-width="0.4" opacity="0.15">
+          <line x1="100" y1="70" x2="210" y2="55"/><line x1="210" y1="55" x2="320" y2="70"/>
+          <line x1="100" y1="70" x2="140" y2="160"/><line x1="320" y1="70" x2="280" y2="160"/>
+          <line x1="140" y1="160" x2="280" y2="160"/><line x1="210" y1="55" x2="140" y2="160"/>
+          <line x1="210" y1="55" x2="280" y2="160"/>
+        </g>
+        <!-- Labels -->
+        <g font-family="'IBM Plex Mono',monospace" font-size="7" fill="#8a8b9e" opacity="0.35" text-anchor="middle">
+          <text x="100" y="100">Finance AI</text><text x="210" y="85">Beauty AI</text><text x="320" y="100">Health AI</text>
+          <text x="140" y="190">Travel AI</text><text x="280" y="190">Tech AI</text>
+        </g>
+        <text x="210" y="245" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="8" fill="#7b5cd6" opacity="0.4" letter-spacing="3">DSLM</text>
+      </svg>
+    </div>
+    <h2>Specialised <em>intelligence</em> across every domain</h2>
+    <p>AI woven into the fabric of every gateway. Not one generic assistant — <strong>thousands of domain-specific experts</strong>, each learning, each deepening, each understanding its category better than anything else on the internet.</p>
+  </div>
+</section>
 
-<hr>
+<!-- ══════════════════════════════════════════════════════════════════════════
+     CARD 8 — THE COMMERCE
+     ══════════════════════════════════════════════════════════════════════════ -->
+<section class="card" style="background:var(--card-8)">
+  <div class="card-inner">
+    <div class="card-num">07 · The Commerce</div>
+    <div class="card-illust">
+      <svg viewBox="0 0 420 260" xmlns="http://www.w3.org/2000/svg">
+        <!-- Brand Zones embedded within a community space -->
+        <defs>
+          <linearGradient id="g8" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#ec1c24" stop-opacity="0.5"/><stop offset="100%" stop-color="#1b75bb" stop-opacity="0.5"/>
+          </linearGradient>
+        </defs>
+        <!-- Community circle -->
+        <circle cx="210" cy="120" r="85" fill="none" stroke="#5a78f5" stroke-width="0.6" opacity="0.15"/>
+        <text x="210" y="30" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="8" fill="#5a78f5" opacity="0.3" letter-spacing="3">COMMUNITY</text>
+        <!-- Brand Zone cards inside -->
+        <g opacity="0.4">
+          <rect x="130" y="72" width="68" height="42" rx="6" fill="none" stroke="#ec1c24" stroke-width="0.8"/>
+          <rect x="222" y="72" width="68" height="42" rx="6" fill="none" stroke="#7b5cd6" stroke-width="0.8"/>
+          <rect x="130" y="130" width="68" height="42" rx="6" fill="none" stroke="#1b75bb" stroke-width="0.8"/>
+          <rect x="222" y="130" width="68" height="42" rx="6" fill="none" stroke="#ff3e8e" stroke-width="0.8"/>
+        </g>
+        <!-- Brand Zone labels -->
+        <g font-family="'IBM Plex Mono',monospace" font-size="7" fill="#8a8b9e" opacity="0.35" text-anchor="middle">
+          <text x="164" y="97">Brand A</text><text x="256" y="97">Brand B</text>
+          <text x="164" y="155">Brand C</text><text x="256" y="155">Brand D</text>
+        </g>
+        <!-- "Brand Zones" label -->
+        <text x="210" y="205" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-size="8" fill="#ff3e8e" opacity="0.4" letter-spacing="2">BRAND ZONES</text>
+        <!-- Apps floating around -->
+        <g opacity="0.25">
+          <rect x="65" y="90" width="22" height="22" rx="5" fill="none" stroke="#5a78f5" stroke-width="0.6"/>
+          <rect x="335" y="85" width="22" height="22" rx="5" fill="none" stroke="#5a78f5" stroke-width="0.6"/>
+          <rect x="75" y="165" width="22" height="22" rx="5" fill="none" stroke="#7b5cd6" stroke-width="0.6"/>
+          <rect x="325" y="160" width="22" height="22" rx="5" fill="none" stroke="#7b5cd6" stroke-width="0.6"/>
+        </g>
+        <g font-family="'IBM Plex Mono',monospace" font-size="6" fill="#5a78f5" opacity="0.25" text-anchor="middle">
+          <text x="76" y="125">App</text><text x="346" y="120">App</text>
+          <text x="86" y="200">Tool</text><text x="336" y="195">Tool</text>
+        </g>
+      </svg>
+    </div>
+    <h2>Commerce in the <em>heart</em> of the community</h2>
+    <p>Brand Zones bring contextual commerce directly into the communities where it belongs. Apps and tools appear when and where you need them. <strong>Everything contextual. Nothing forced.</strong></p>
+  </div>
+</section>
 
-<h2>3. The Complete Architecture</h2>
-<h3>A Ready-to-Deploy Blueprint</h3>
+<!-- ══════════════════════════════════════════════════════════════════════════
+     CARD 9 — THE ORGANIZING LAYER (CLOSE)
+     ══════════════════════════════════════════════════════════════════════════ -->
+<section class="card" style="background:var(--card-9)">
+  <div class="card-inner">
+    <div class="card-num">The Vision</div>
+    <div class="card-illust">
+      <svg viewBox="0 0 420 260" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="g9" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#ec1c24"/><stop offset="50%" stop-color="#7b5cd6"/><stop offset="100%" stop-color="#1b75bb"/>
+          </linearGradient>
+          <radialGradient id="glow9" cx="50%" cy="50%">
+            <stop offset="0%" stop-color="#5a78f5" stop-opacity="0.15"/>
+            <stop offset="100%" stop-color="#5a78f5" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <circle cx="210" cy="120" r="95" fill="url(#glow9)"/>
+        <!-- Full constellation — the complete picture -->
+        <g stroke="url(#g9)" stroke-width="0.4" opacity="0.2">
+          <line x1="210" y1="120" x2="120" y2="55"/><line x1="210" y1="120" x2="300" y2="50"/>
+          <line x1="210" y1="120" x2="85" y2="120"/><line x1="210" y1="120" x2="335" y2="125"/>
+          <line x1="210" y1="120" x2="130" y2="195"/><line x1="210" y1="120" x2="290" y2="190"/>
+          <line x1="120" y1="55" x2="300" y2="50"/><line x1="85" y1="120" x2="130" y2="195"/>
+          <line x1="335" y1="125" x2="290" y2="190"/><line x1="120" y1="55" x2="85" y2="120"/>
+          <line x1="300" y1="50" x2="335" y2="125"/><line x1="130" y1="195" x2="290" y2="190"/>
+        </g>
+        <!-- Outer expansion -->
+        <g stroke="url(#g9)" stroke-width="0.3" opacity="0.1">
+          <line x1="120" y1="55" x2="70" y2="25"/><line x1="300" y1="50" x2="360" y2="22"/>
+          <line x1="85" y1="120" x2="35" y2="110"/><line x1="335" y1="125" x2="385" y2="118"/>
+          <line x1="130" y1="195" x2="85" y2="235"/><line x1="290" y1="190" x2="340" y2="230"/>
+        </g>
+        <g opacity="0.5">
+          <circle cx="120" cy="55" r="3.5" fill="#ec1c24"/><circle cx="300" cy="50" r="3.5" fill="#1b75bb"/>
+          <circle cx="85" cy="120" r="3.5" fill="#7b5cd6"/><circle cx="335" cy="125" r="3.5" fill="#ff3e8e"/>
+          <circle cx="130" cy="195" r="3.5" fill="#5a78f5"/><circle cx="290" cy="190" r="3.5" fill="#ec1c24"/>
+        </g>
+        <g opacity="0.2">
+          <circle cx="70" cy="25" r="2" fill="#ec1c24"/><circle cx="360" cy="22" r="2" fill="#1b75bb"/>
+          <circle cx="35" cy="110" r="2" fill="#7b5cd6"/><circle cx="385" cy="118" r="2" fill="#5a78f5"/>
+          <circle cx="85" cy="235" r="2" fill="#ff3e8e"/><circle cx="340" cy="230" r="2" fill="#ec1c24"/>
+        </g>
+        <!-- Hub -->
+        <circle cx="210" cy="120" r="7" fill="url(#g9)" opacity="0.7">
+          <animate attributeName="r" values="7;10;7" dur="3.5s" repeatCount="indefinite"/>
+        </circle>
+      </svg>
+    </div>
+    <h2>This is the <span class="grad">Organizing Layer</span></h2>
+    <p>A place where everything will find its natural home. Not another platform. Not another app. <strong>The infrastructure that sits beneath everything else</strong> — connecting, organising, and making the internet work the way it always should have.</p>
+    <a href="index.html" class="cta-btn">Return to the Hub &rarr;</a>
+  </div>
+</section>
 
-<h3>The Supernova Application</h3>
-<p>A single Progressive Web App serves as the universal delivery vehicle. Rather than compressing the internet inward, it expands outward &mdash; delivering one unified account and profile that works seamlessly across every gateway, Brand Zone, and the central Hub.</p>
-<p>Key capabilities include a single shopping cart, full offline functionality, push notifications, instant updates, and freedom from traditional app-store gatekeepers and their fees. A personalised Supernova Hub acts as the central command centre and AI co-pilot for the entire ecosystem.</p>
+<script>
+const cards = document.querySelectorAll('.card');
+const prog  = document.getElementById('progress');
 
-<h3>The GENEXXO App Store</h3>
-<p>Integrated directly within the Supernova PWA and accessible contextually from any gateway, the GENEXXO App Store delivers specialist agents, agentic swarms, and productivity tools exactly where they are needed &mdash; in the right context, at the right moment. Users and brands can discover, deploy, and execute these tools within a specific gateway or across the broader network via the Hub.</p>
+cards.forEach((_,i) => {
+  const dot = document.createElement('button');
+  dot.className = 'progress-dot';
+  dot.setAttribute('aria-label', `Card ${i+1}`);
+  dot.onclick = () => cards[i].scrollIntoView({behavior:'smooth'});
+  prog.appendChild(dot);
+});
 
-<h3>Independent Gateways as Self-Evolving Entities</h3>
-<p>Each gateway operates as its own autonomous, self-evolving micro-world and beacon. It develops independently with its own targeted content strategy, community engagement, marketing initiatives, and localised AI intelligence. Every gateway also functions as a direct on-ramp to the full Supernova PWA, where the unified account and profile activate instantly.</p>
+const dots = document.querySelectorAll('.progress-dot');
 
-<h3>Brand Zones: Extending D2C into Communities</h3>
-<p>Brands receive dedicated, fully owned Brand Zones placed inside the most relevant gateways and communities. This model enables brands to extend their Direct-to-Consumer operations directly into passionate, context-rich communities; operate meritocratic, branded experiences with full control over messaging, customer relationships, data, and fulfilment; benefit from unified GENEXXO checkout while maintaining their own logistics and post-sale relationships; and leverage contextual AI agents and tools from the App Store for personalised offers and deeper engagement.</p>
-<p><strong>Commerce happens in authentic context, driving higher conversion and lifetime value.</strong></p>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const idx = [...cards].indexOf(e.target);
+      dots.forEach((d,i) => d.classList.toggle('active', i===idx));
+    }
+  });
+}, {threshold:0.55});
 
-<h3>The Facilitator Model</h3>
-<p>GENEXXO operates as a pure coordinator &mdash; never owning inventory, logistics, fulfilment, or customer service. This asset-light structure generates high-margin revenue through facilitation fees, contextual advertising, App Store transactions, and premium intelligence, while keeping incentives perfectly aligned with all participants.</p>
+cards.forEach(c => obs.observe(c));
 
-<h3>The Multi-Dimensional Network</h3>
-<p>The gateways form a powerful constellation &mdash; a gravitational network. Each independent beacon exerts strong pull within its category, while natural pathways allow seamless movement across the system through the central Hub. Users move contextually with their single unified profile intact, delivering both profound depth and meaningful breadth.</p>
+const fadeObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.style.opacity = '1';
+      e.target.style.transform = 'translateY(0)';
+    }
+  });
+}, {threshold:0.3});
 
-<h3>Four Native Pillars</h3>
-<p>Four pillars operate everywhere within the ecosystem, all the time:</p>
-<ul>
-  <li><strong>Content</strong> &mdash; Expert-led, context-rich material with dual-feed architecture that fuels self-evolution across every gateway.</li>
-  <li><strong>Community</strong> &mdash; Permanent, purpose-built homes tailored to each gateway's audience, creating belonging and sustained engagement.</li>
-  <li><strong>Commerce via Brand Zones</strong> &mdash; Meritocratic, owned brand spaces inside the most relevant gateways, with unified checkout in authentic context, enabling seamless D2C extension.</li>
-  <li><strong>Agentic AI Intelligence</strong> &mdash; Built natively with four layered models (domain/gateway &#8594; category &#8594; ecosystem &#8594; Hub) that learn from clean, authenticated, contextual data. The integrated App Store enables specialist agents and swarms to execute with unparalleled trust and precision.</li>
-</ul>
-
-<hr>
-
-<h2>4. Structural Network Effects</h2>
-<p>Network effects in GENEXXO are structural rather than incidental. Each gateway's independent growth, each brand's D2C activation inside Brand Zones, and every new piece of content or agentic tool strengthens the gravitational pull of the entire network. The four pillars feed one another in a compounding flywheel, while cross-pollination between beacons &mdash; amplified by contextual tools from the App Store &mdash; generates perpetual innovation at scale.</p>
-
-<hr>
-
-<h2>5. Strategic Timing</h2>
-<h3>The Vision Meets the Agentic Era</h3>
-<p>The GENEXXO Collection was established over 14 years as foundational linguistic infrastructure. The complete vision has now matured into a fully detailed, ready-to-deploy blueprint that is purpose-built for the emerging agentic economy.</p>
-<p>Its native AI layers, trusted contextual data, interconnected architecture with one unified account and profile, and in-context GENEXXO App Store provide the ideal substrate for specialist agents, swarms, and brand D2C strategies to operate reliably and intelligently. <strong>The timing of this convergence is significant: the infrastructure precedes the era it was designed to serve.</strong></p>
-
-<hr>
-
-<h2>6. The Opportunity</h2>
-<h3>Acquisition &amp; Strategic Partnership</h3>
-<p>The GENEXXO Collection is complete and locked. The full architecture &mdash; including the Supernova PWA with one unified account and profile, its integrated contextual App Store, thousands of independent self-evolving gateways, dedicated Brand Zones for D2C extension, the Facilitator Model, and native agentic intelligence &mdash; is designed as a complete blueprint and ready for immediate deployment.</p>
-<p>This represents a rare opportunity to own the internet's organising layer: a gravitational network of beacons where everything &mdash; including brands' D2C models and users' seamless identities &mdash; can find its natural home amid growing fragmentation.</p>
-<p><strong>Acquirers or strategic partners gain:</strong></p>
-<ul>
-  <li>An irreplaceable linguistic moat built over 14 years and now locked.</li>
-  <li>Instant brand equity through 10,000+ premium gateways spanning 45 categories.</li>
-  <li>Superior economics via the asset-light Facilitator Model.</li>
-  <li>A powerful new channel for deeper customer relationships through Brand Zones and contextual AI.</li>
-  <li>A purpose-built substrate for the emerging agentic economy.</li>
-</ul>
-
-<hr>
-
-<h2>Conclusion</h2>
-<h3>A Gravitational Network of Natural Homes</h3>
-<p>The GENEXXO Vision is not another platform seeking to unify or replace the existing digital landscape. It is the organising layer the internet has lacked &mdash; a coherent gravitational network of independent, self-evolving beacons where people, creators, communities, brands, content, and agents can choose to find their natural home.</p>
-<p>With one unified account and profile across the entire ecosystem, the Supernova PWA, its powerful in-context App Store, dedicated Brand Zones for D2C extension, structural network effects, and native intelligence, this blueprint offers a compelling alternative that will compound in value as fragmentation accelerates.</p>
-<blockquote>The foundation is irreplaceable. The blueprint is complete. The timing is now. GENEXXO is ready for deployment.</blockquote>
-
-<hr>
-
-<p style="font-size:12px;color:var(--text-muted);line-height:1.6;margin-top:32px;text-align:center;"><em>&copy; 2026 GENEXXO Vision Limited. All rights reserved. Confidential.</em></p>
-
-</article>
-
-<nav class="page-nav">
-  <a href="index.html"><span class="page-nav-label">&larr; Previous</span><span class="page-nav-title">Home</span></a>
-  <a href="collection.html" class="page-nav-next"><span class="page-nav-label">Next &rarr;</span><span class="page-nav-title">The Collection</span></a>
-</nav>
-
-<footer class="footer"><div class="footer-company">&copy; 2025 <strong>GENEXXO Vision Limited</strong> &middot; Company No. 022622V &middot; Isle of Man</div></footer>
-</div>
-<script>function toggleSidebar(){document.getElementById('sidebar').classList.toggle('open');document.getElementById('sidebarOverlay').classList.toggle('open')}</script>
+document.querySelectorAll('.card-inner').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(30px)';
+  el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+  fadeObs.observe(el);
+});
+</script>
 </body>
 </html>
