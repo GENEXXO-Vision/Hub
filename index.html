@@ -318,17 +318,68 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
 .opp-badge::before { content: ''; width: 6px; height: 6px; background: var(--coral); border-radius: 50%; animation: pulse 2s infinite; }
 .opp-title { font-size: 32px; font-weight: 700; letter-spacing: -0.5px; }
 
-.thesis { max-width: 720px; margin: 0 auto 48px; text-align: center; padding: 0 20px; }
-.thesis p { font-size: 16px; color: var(--text-secondary); line-height: 1.85; margin-bottom: 16px; }
-.thesis p strong { color: var(--text-primary); font-weight: 500; }
-.thesis-gravity { font-size: 17px; font-weight: 500; font-style: italic; margin-top: 24px; background: linear-gradient(135deg, var(--coral), var(--purple), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-
-.asset-bar { display: flex; gap: 16px; margin: 0 60px 48px; }
-.asset-stat { flex: 1; padding: 24px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; text-align: center; position: relative; overflow: hidden; }
-.asset-stat::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, var(--coral), var(--purple), var(--accent)); opacity: 0.6; }
-.asset-stat-value { font-family: var(--font-mono); font-size: 22px; font-weight: 700; color: var(--accent-light); margin-bottom: 4px; }
-.asset-stat-label { font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
-.asset-stat-desc { font-size: 13px; color: var(--text-secondary); margin-top: 8px; line-height: 1.5; }
+.thesis-card {
+  position: relative;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  overflow: hidden;
+  margin: 0 60px 56px;
+}
+.thesis-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, var(--coral), var(--purple), var(--accent));
+}
+.thesis-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 3px; height: 100%;
+  background: linear-gradient(180deg, var(--coral), var(--purple), var(--accent));
+  opacity: 0.6;
+}
+.thesis-inner {
+  padding: 48px 52px 48px 56px;
+  background: linear-gradient(135deg, var(--bg-card), rgba(22, 22, 31, 0.5));
+  position: relative;
+}
+.thesis-watermark {
+  position: absolute;
+  bottom: -20px; right: -10px;
+  width: 220px; height: 176px;
+  opacity: 0.02;
+  pointer-events: none;
+}
+.thesis-watermark svg { width: 100%; height: 100%; }
+.thesis-para {
+  font-size: 15.5px;
+  color: var(--text-secondary);
+  line-height: 1.85;
+  margin-bottom: 24px;
+  max-width: 640px;
+}
+.thesis-para:last-of-type { margin-bottom: 0; }
+.thesis-para strong { color: var(--text-primary); font-weight: 500; }
+.thesis-divider {
+  width: 48px;
+  height: 1px;
+  background: linear-gradient(90deg, var(--coral), var(--purple));
+  margin: 32px 0;
+  opacity: 0.5;
+}
+.thesis-close {
+  font-size: 19px;
+  font-weight: 500;
+  font-style: italic;
+  line-height: 1.5;
+  background: linear-gradient(135deg, var(--coral), var(--purple), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  max-width: 520px;
+}
 
 .acq-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--purple); font-weight: 600; margin-bottom: 16px; text-align: center; }
 .acq-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin: 0 60px 48px; }
@@ -366,7 +417,8 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
   .foundation { grid-template-columns: 1fr; }
   .foundation-left { border-right: none; border-bottom: 1px solid var(--border); }
   .foundation-left, .foundation-right { padding: 32px 24px; }
-  .asset-bar { flex-direction: column; margin: 0 24px 48px; }
+  .thesis-card { margin: 0 24px 48px; }
+  .thesis-inner { padding: 32px 24px 32px 28px; }
   .acq-grid { grid-template-columns: 1fr; margin: 0 24px 48px; }
   .thesis { padding: 0; }
   .footer { padding: 24px; }
@@ -503,17 +555,20 @@ body { background: var(--bg-primary); color: var(--text-primary); font-family: v
       <h2 class="opp-title">The Defining Moment</h2>
     </div>
 
-    <div class="thesis">
-      <p>The internet is approaching a structural transition. AI agents, autonomous commerce, and an unprecedented volume of content are converging on a digital landscape that was <strong>never designed to organise them</strong>. The platforms that exist today will not absorb what&apos;s coming &mdash; they&apos;ll overflow into noise, fragmentation, and chaos.</p>
-      <p>What&apos;s needed is not another app, not another platform, not another feature. What&apos;s needed is a <strong>new organizing layer</strong> &mdash; specialised, interconnected, AI-native, and anchored by infrastructure that reaches into every category of human activity. A foundation for a network where everything finds its natural home.</p>
-      <p>With every month that passes, the agentic infrastructure matures. The deployment path becomes clearer. The opportunity becomes more concrete. <strong>This is not a question of if. It is a question of when &mdash; and who.</strong></p>
-      <p class="thesis-gravity">The corporation that moves first doesn&apos;t just enter a market. It becomes the market.</p>
-    </div>
+    <div class="thesis-card">
+      <div class="thesis-inner">
+        <div class="thesis-watermark"><svg viewBox="484 0 176 138" xmlns="http://www.w3.org/2000/svg"><path fill="#ffffff" fill-rule="evenodd" d="M 616,69.25 L 604.8,85.9 L 583.2,118.7 L 572.3,135.3 L 561.4,118.7 L 539.7,85.9 L 506.9,135.6 L 484.8,135.6 L 526.3,72.7 L 528.6,69.25 L 539.5,52.6 L 561.1,19.8 L 572,3.16 L 583,19.8 L 604.6,52.6 L 637.4,2.9 L 659.5,2.9 L 615.8,69.25 Z M 593.9,69.25 L 572.3,36.45 L 550.7,69.25 L 572.3,102.04 Z"/><path fill="#ffffff" d="M 610.5,94.6 L 637.6,135.6 L 659.7,135.6 L 621.7,77.9 Z"/><path fill="#ffffff" d="M 506.9,2.9 L 484.8,2.9 L 522.8,60.3 L 534.3,44.2 Z"/></svg></div>
 
-    <div class="asset-bar">
-      <div class="asset-stat"><div class="asset-stat-value">10,000+</div><div class="asset-stat-label">XX Domains</div><div class="asset-stat-desc">Single-word .com domains spanning every significant commercial category</div></div>
-      <div class="asset-stat"><div class="asset-stat-value">14 Years</div><div class="asset-stat-label">In Assembly</div><div class="asset-stat-desc">A window that opened once and has now permanently closed</div></div>
-      <div class="asset-stat"><div class="asset-stat-value">Invincible</div><div class="asset-stat-label">Moat</div><div class="asset-stat-desc">No competing collection of comparable quality can ever be assembled again</div></div>
+        <p class="thesis-para">The internet is approaching a structural transition. AI agents, autonomous commerce, and an unprecedented volume of content are converging on a digital landscape that was <strong>never designed to organise them</strong>. The platforms that exist today will not absorb what&apos;s coming &mdash; they&apos;ll overflow into noise, fragmentation, and chaos.</p>
+
+        <p class="thesis-para">What&apos;s needed is not another app, not another platform, not another feature. What&apos;s needed is a <strong>new organizing layer</strong> &mdash; specialised, interconnected, AI-native, and anchored by infrastructure that reaches into every category of human activity. A foundation for a network where everything finds its natural home.</p>
+
+        <p class="thesis-para">With every month that passes, the agentic infrastructure matures. The deployment path becomes clearer. The opportunity becomes more concrete. <strong>This is not a question of if. It is a question of when &mdash; and who.</strong></p>
+
+        <div class="thesis-divider"></div>
+
+        <p class="thesis-close">The corporation that moves first doesn&apos;t just enter a market. It becomes the market.</p>
+      </div>
     </div>
 
     <div class="acq-label">Who Acquires The Organizing Layer</div>
